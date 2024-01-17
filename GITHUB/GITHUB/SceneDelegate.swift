@@ -11,21 +11,32 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
     
-    
-    
-    
-    
-    
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
       
-        guard let windowScene = (scene as? UIWindowScene) else { return }
+        guard let windowScene = (scene as? UIWindowScene) else { return}
+        
+        // rootVC for search VC
+        let searchNC = UINavigationController(rootViewController: SearchVC())
+        
+        // rootVC for favoriteListVC
+        let favoritesNC = UINavigationController(rootViewController: FavoriteListVC())
+        
+        
+        // tab bar controller is holding on onto the navigation controller - witch is holding the VC
+        let tabbar = UITabBarController()
+        tabbar.viewControllers = [searchNC, favoritesNC]
+        
+        
         // will take up the whole screen
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         // every window has a windowScene
         window?.windowScene = windowScene
-        // creating the ViewController
-        window?.rootViewController = ViewController()
-        // will make the VC Vistible 
+        // creating the ViewController - removing this to replace a tab bar controller
+//        window?.rootViewController = ViewController()
+        
+        // creating the table controller - place holder for now - hold the navigation controller
+        window?.rootViewController = tabbar
+        // will make the VC Visible on the screen
         window?.makeKeyAndVisible()
     }
 
