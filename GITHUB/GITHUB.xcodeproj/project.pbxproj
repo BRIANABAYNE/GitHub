@@ -14,6 +14,7 @@
 		3A7469C72B5742DF001A8024 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A7469C52B5742DF001A8024 /* LaunchScreen.storyboard */; };
 		3A7469CF2B5785F7001A8024 /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7469CE2B5785F7001A8024 /* SearchVC.swift */; };
 		3A7469D12B578632001A8024 /* FavoriteListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7469D02B578632001A8024 /* FavoriteListVC.swift */; };
+		3A7469D32B583B13001A8024 /* GFButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7469D22B583B13001A8024 /* GFButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		3A7469C82B5742DF001A8024 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3A7469CE2B5785F7001A8024 /* SearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
 		3A7469D02B578632001A8024 /* FavoriteListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteListVC.swift; sourceTree = "<group>"; };
+		3A7469D22B583B13001A8024 /* GFButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +60,7 @@
 		3A7469B92B5742DD001A8024 /* GITHUB */ = {
 			isa = PBXGroup;
 			children = (
+				3A7469D22B583B13001A8024 /* GFButton.swift */,
 				3A7469BA2B5742DD001A8024 /* AppDelegate.swift */,
 				3A7469BC2B5742DD001A8024 /* SceneDelegate.swift */,
 				3A7469CE2B5785F7001A8024 /* SearchVC.swift */,
@@ -142,6 +145,7 @@
 			files = (
 				3A7469CF2B5785F7001A8024 /* SearchVC.swift in Sources */,
 				3A7469D12B578632001A8024 /* FavoriteListVC.swift in Sources */,
+				3A7469D32B583B13001A8024 /* GFButton.swift in Sources */,
 				3A7469BF2B5742DD001A8024 /* ViewController.swift in Sources */,
 				3A7469BB2B5742DD001A8024 /* AppDelegate.swift in Sources */,
 				3A7469BD2B5742DD001A8024 /* SceneDelegate.swift in Sources */,
