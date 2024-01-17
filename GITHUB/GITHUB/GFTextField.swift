@@ -36,6 +36,8 @@ class GFTextField: UITextField {
         backgroundColor = .tertiarySystemBackground
         // This is auto correct when a user is typing, this wouldn't be needed since we user will be typing in a name and we wouldn't want it to auto correct.
         autocorrectionType = .no
+        // costume the return type on the keyboard 
+        returnKeyType = .go
         placeholder = "Enter a username"
         
     }

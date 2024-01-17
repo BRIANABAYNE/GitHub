@@ -15,15 +15,19 @@ class SearchVC: UIViewController {
     let userNameTextField = GFTextField()
     let callToActionButton = GFButton(backgroundColor: .systemGreen, title: "Get Followers")
     
+    // MARK: - Computed Property
+    var isUserNameEntered: Bool {
+        return !userNameTextField.text!.isEmpty
+    }
+    
     // MARK: - Lifecycles
-// view didload only gets called once
+    
+// view did load only gets called once
     override func viewDidLoad() {
         super.viewDidLoad()
         // calling this to use for either dark mode or light mode , will adapt
         view.backgroundColor = .systemBackground
-        configureLogoImageView()
-        configureTextField()
-        configureCallToActionButton()
+        helperFunction()
     }
     
     // whenever you are overriding something, most of the time you will want to call the super. This is what happens every time view will appear
@@ -31,6 +35,40 @@ class SearchVC: UIViewController {
         super.viewWillAppear(animated)
         navigationController?.isNavigationBarHidden = true
     }
+    
+    // MARK: - Methods
+    
+    func helperFunction() {
+        configureLogoImageView()
+        configureTextField()
+        configureCallToActionButton()
+        createDismissKeyboardTapGuesture()
+    }
+    
+    
+    func createDismissKeyboardTapGuesture() {
+        // what view is going to act on this action, textField is the first responder
+        let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
+        view.addGestureRecognizer(tap)
+    }
+
+    
+    @objc func pushFollowersListVC() {
+        
+        
+        guard isUserNameEntered else {
+        print("No userName")
+         return
+        }
+        // creating the class type where we want to send the data - creating the object
+        let followerListVC = FollowersListVC()
+        // the data we want to move to the next screen
+        followerListVC.userName = userNameTextField.text
+        followerListVC.title = userNameTextField.text
+        // navigation to slide in - pushing that data the next screen 
+        navigationController?.pushViewController(followerListVC, animated: true)
+    }
+    
     
     func configureLogoImageView() {
         // calling our property that I made on line 14 inside of the subView
@@ -54,10 +92,10 @@ class SearchVC: UIViewController {
             ])
     }
     
-    
     func configureTextField() {
         // passing in the property that was made on line 15
         view.addSubview(userNameTextField)
+        userNameTextField.delegate = self
         NSLayoutConstraint.activate([
             // pinning it to the bottom of the logoImageView with 48 - Y
             userNameTextField.topAnchor.constraint(equalTo: logoImageView.bottomAnchor,constant: 48),
@@ -66,13 +104,16 @@ class SearchVC: UIViewController {
             userNameTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50),
             // apple says buttons should be at least 44 points high per the human interface guidelines
             userNameTextField.heightAnchor.constraint(equalToConstant: 50)
+            
         ])
     }
-    
     
     func configureCallToActionButton() {
         // This is actually putting the button on the screen
         view.addSubview(callToActionButton)
+        // Whenever we tap the callToAction button, the pushFollowersListVC will be called. TouchupInside is the type of action the button will take
+        callToActionButton.addTarget(self, action: #selector(pushFollowersListVC), for: .touchUpInside)
+
         NSLayoutConstraint.activate([
             callToActionButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -50),
             callToActionButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 50),
@@ -80,7 +121,14 @@ class SearchVC: UIViewController {
             callToActionButton.heightAnchor.constraint(equalToConstant: 50)
             ])
     }
-    
-    
-    
+}
+
+// MARK: - Extension
+
+extension SearchVC: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        // pushing one screen to another screen
+      pushFollowersListVC()
+        return true
+    }
 }
