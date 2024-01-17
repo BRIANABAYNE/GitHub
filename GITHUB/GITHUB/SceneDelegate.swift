@@ -16,15 +16,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return}
         
         // rootVC for search VC
-        let searchNC = UINavigationController(rootViewController: SearchVC())
+//        let searchNC = UINavigationController(rootViewController: SearchVC())
         
         // rootVC for favoriteListVC
-        let favoritesNC = UINavigationController(rootViewController: FavoriteListVC())
+//        let favoritesNC = UINavigationController(rootViewController: FavoriteListVC())
         
         
         // tab bar controller is holding on onto the navigation controller - witch is holding the VC
-        let tabbar = UITabBarController()
-        tabbar.viewControllers = [searchNC, favoritesNC]
+       // let tabbar = UITabBarController()
+     //  tabbar.viewControllers = [searchNC, favoritesNC]
         
         
         // will take up the whole screen
@@ -35,11 +35,45 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //        window?.rootViewController = ViewController()
         
         // creating the table controller - place holder for now - hold the navigation controller
-        window?.rootViewController = tabbar
+        window?.rootViewController = createTabBar()
         // will make the VC Visible on the screen
         window?.makeKeyAndVisible()
     }
+    
+    func createSearchNC() -> UINavigationController {
+        // init the SearchVC
+        let searchVC  = SearchVC()
+        // giving it a title
+        searchVC.title = "Search"
+        // adding the system image
+        searchVC.tabBarItem = UITabBarItem(tabBarSystemItem: .search, tag: 0)
+        // returning a navigationController that we just created
+        return UINavigationController(rootViewController: searchVC)
 
+    }
+    
+      
+    func createFavoritesNC() -> UINavigationController {
+        // init the FavoriteListVC
+        let favoriteListVC = FavoriteListVC()
+        // Give it a title
+        favoriteListVC.title = "Favorites"
+        // tabbar and
+        favoriteListVC.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 1)
+        return UINavigationController(rootViewController: favoriteListVC)
+        
+    }
+    
+    func createTabBar() -> UITabBarController {
+        let tabbar = UITabBarController()
+        // the overall appearance of tabbar
+        UITabBar.appearance().tintColor = .systemGreen
+        // tabbar just created is the vc = an array of viewControllers
+        tabbar.viewControllers = [createSearchNC(), createFavoritesNC()]
+        
+        return tabbar
+    }
+    
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.
         // This occurs shortly after the scene enters the background, or when its session is discarded.
