@@ -72,23 +72,55 @@
 		3A7469B92B5742DD001A8024 /* GITHUB */ = {
 			isa = PBXGroup;
 			children = (
+				3A746A0A2B696A91001A8024 /* Extension */,
+				3A746A092B696A5B001A8024 /* CustomViews */,
+				3A746A082B696A2B001A8024 /* Screens */,
+				3A7469BE2B5742DD001A8024 /* ViewController.swift */,
+				3A746A0B2B696AF4001A8024 /* SupportingFiles */,
+			);
+			path = GITHUB;
+			sourceTree = "<group>";
+		};
+		3A746A082B696A2B001A8024 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				3A7469CE2B5785F7001A8024 /* SearchVC.swift */,
+				3A7469D02B578632001A8024 /* FavoriteListVC.swift */,
+				3A7469D82B588A63001A8024 /* FollowersListVC.swift */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		3A746A092B696A5B001A8024 /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+				3A7469DC2B58CD8B001A8024 /* GFBodyLabel.swift */,
+				3A7469DA2B58CBB3001A8024 /* GFTitleLabel.swift */,
+				3A7469D62B5854F9001A8024 /* GFTextField.swift */,
 				3A7469D22B583B13001A8024 /* GFButton.swift */,
+				3A7469DE2B58CE61001A8024 /* GFAlertVC.swift */,
+			);
+			path = CustomViews;
+			sourceTree = "<group>";
+		};
+		3A746A0A2B696A91001A8024 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				3A746A062B696081001A8024 /* UIViewController + EXT.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		3A746A0B2B696AF4001A8024 /* SupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
 				3A7469BA2B5742DD001A8024 /* AppDelegate.swift */,
 				3A7469BC2B5742DD001A8024 /* SceneDelegate.swift */,
-				3A7469CE2B5785F7001A8024 /* SearchVC.swift */,
-				3A7469BE2B5742DD001A8024 /* ViewController.swift */,
 				3A7469C32B5742DF001A8024 /* Assets.xcassets */,
 				3A7469C52B5742DF001A8024 /* LaunchScreen.storyboard */,
 				3A7469C82B5742DF001A8024 /* Info.plist */,
-				3A7469D02B578632001A8024 /* FavoriteListVC.swift */,
-				3A7469D62B5854F9001A8024 /* GFTextField.swift */,
-				3A7469D82B588A63001A8024 /* FollowersListVC.swift */,
-				3A7469DA2B58CBB3001A8024 /* GFTitleLabel.swift */,
-				3A7469DC2B58CD8B001A8024 /* GFBodyLabel.swift */,
-				3A7469DE2B58CE61001A8024 /* GFAlertVC.swift */,
-				3A746A062B696081001A8024 /* UIViewController + EXT.swift */,
 			);
-			path = GITHUB;
+			path = SupportingFiles;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -318,7 +350,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = X5MZCV93J6;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = GITHUB/Info.plist;
+				INFOPLIST_FILE = GITHUB/SupportingFiles/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
@@ -347,7 +379,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = X5MZCV93J6;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = GITHUB/Info.plist;
+				INFOPLIST_FILE = GITHUB/SupportingFiles/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
