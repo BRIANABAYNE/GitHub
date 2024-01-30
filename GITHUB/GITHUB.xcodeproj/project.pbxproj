@@ -20,6 +20,7 @@
 		3A7469DB2B58CBB3001A8024 /* GFTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7469DA2B58CBB3001A8024 /* GFTitleLabel.swift */; };
 		3A7469DD2B58CD8B001A8024 /* GFBodyLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7469DC2B58CD8B001A8024 /* GFBodyLabel.swift */; };
 		3A7469DF2B58CE61001A8024 /* GFAlertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7469DE2B58CE61001A8024 /* GFAlertVC.swift */; };
+		3A746A072B696081001A8024 /* UIViewController + EXT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A746A062B696081001A8024 /* UIViewController + EXT.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		3A7469DA2B58CBB3001A8024 /* GFTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFTitleLabel.swift; sourceTree = "<group>"; };
 		3A7469DC2B58CD8B001A8024 /* GFBodyLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFBodyLabel.swift; sourceTree = "<group>"; };
 		3A7469DE2B58CE61001A8024 /* GFAlertVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFAlertVC.swift; sourceTree = "<group>"; };
+		3A746A062B696081001A8024 /* UIViewController + EXT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + EXT.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +86,7 @@
 				3A7469DA2B58CBB3001A8024 /* GFTitleLabel.swift */,
 				3A7469DC2B58CD8B001A8024 /* GFBodyLabel.swift */,
 				3A7469DE2B58CE61001A8024 /* GFAlertVC.swift */,
+				3A746A062B696081001A8024 /* UIViewController + EXT.swift */,
 			);
 			path = GITHUB;
 			sourceTree = "<group>";
@@ -166,6 +169,7 @@
 				3A7469DF2B58CE61001A8024 /* GFAlertVC.swift in Sources */,
 				3A7469D72B5854F9001A8024 /* GFTextField.swift in Sources */,
 				3A7469DB2B58CBB3001A8024 /* GFTitleLabel.swift in Sources */,
+				3A746A072B696081001A8024 /* UIViewController + EXT.swift in Sources */,
 				3A7469BB2B5742DD001A8024 /* AppDelegate.swift in Sources */,
 				3A7469BD2B5742DD001A8024 /* SceneDelegate.swift in Sources */,
 				3A7469DD2B58CD8B001A8024 /* GFBodyLabel.swift in Sources */,

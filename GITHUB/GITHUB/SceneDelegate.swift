@@ -77,6 +77,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     
     func configureNavigationBar() {
+        // . appearance means overall - all navigation bars will have this systemGreen 
         UINavigationBar.appearance().tintColor = .systemGreen
     }
     

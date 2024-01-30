@@ -54,10 +54,10 @@ class SearchVC: UIViewController {
 
     
     @objc func pushFollowersListVC() {
-        
-        
+        // guarding to check that UserName is entered
         guard isUserNameEntered else {
-        print("No userName")
+            // if it's not entered, then ALERT will trigger
+           presentGFAlertOnMainThread(alertTitle: "Empty Username", message: "Please enter a GitHub Username!", buttonTitle: "OKAY")
          return
         }
         // creating the class type where we want to send the data - creating the object
@@ -65,7 +65,7 @@ class SearchVC: UIViewController {
         // the data we want to move to the next screen
         followerListVC.userName = userNameTextField.text
         followerListVC.title = userNameTextField.text
-        // navigation to slide in - pushing that data the next screen 
+        // navigation to slide in - pushing that VC onto the stack
         navigationController?.pushViewController(followerListVC, animated: true)
     }
     
