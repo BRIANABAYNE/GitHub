@@ -33,7 +33,7 @@ class SearchVC: UIViewController {
     // whenever you are overriding something, most of the time you will want to call the super. This is what happens every time view will appear
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.isNavigationBarHidden = true
+        navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
     // MARK: - Methods

@@ -22,7 +22,10 @@ class FollowersListVC: UIViewController {
         navigationController?.isNavigationBarHidden = false
         // creating a large title
         navigationController?.navigationBar.prefersLargeTitles = true
-    
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: true)
+    }
 }
