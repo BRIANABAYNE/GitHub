@@ -20,13 +20,13 @@ class FollowersListVC: UIViewController {
         navigationController?.isNavigationBarHidden = false
         // creating a large title
         navigationController?.navigationBar.prefersLargeTitles = true
-        NetworkManager.shared.getFollowers(for: userName, page: 1) { followers, error in
-            guard let followers = followers else {
-                self.presentGFAlertOnMainThread(alertTitle: "Bad Stuff Happened", message: error!.rawValue, buttonTitle: "OK")
-                return
+        NetworkManager.shared.getFollowers(for: userName, page: 1) { result in
+            switch result {
+            case .success(let followers):
+                print(followers)
+            case .failure(let error):
+                self.presentGFAlertOnMainThread(alertTitle: "Bad Stuff Happened", message: error.rawValue, buttonTitle: "OK")
             }
-            print("Followers.count = \(followers.count)")
-            print(followers)
         }
     }
     
