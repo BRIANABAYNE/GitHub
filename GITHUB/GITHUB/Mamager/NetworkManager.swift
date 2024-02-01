@@ -16,26 +16,26 @@ class NetworkManager {
         
     }
     
-    func getFollowers(for userName: String, page: Int, completed: @escaping ([Follower]?, String?) -> Void) {
+    func getFollowers(for userName: String, page: Int, completed: @escaping ([Follower]?, ErrorMessage?) -> Void) {
         let endpoint = baseURL + "\(userName)/followers?per_page=100&page=\(page)"
         // using guard let because it returns an optional
         guard let url = URL(string: endpoint) else {
-            completed(nil, "This user name created an invalid request.")
+            completed(nil, .invalidUsername)
             return
         }
         // URL Session 
         let task = URLSession.shared.dataTask(with: url) { data, response, error in
             if let _  = error {
-                completed(nil, "Unable to complete your request")
+                completed(nil, .unableToComplete)
                 return
             }
             // checking for data "response" - if we have a response, then we are checking to make sure that response is returning with 200, 200 is what we are getting back from the network call.
             guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-                completed(nil, "Invalid response from the server")
+                completed(nil, .invalidResponse)
                 return
             }
             guard let data = data else {
-                completed(nil, "The data received from the server")
+                completed(nil, .invalidData)
                 return
             }
             
@@ -45,7 +45,7 @@ class NetworkManager {
                 let followers = try decoder.decode([Follower].self, from: data)
                 completed(followers,nil)
             } catch {
-                completed(nil, "ERROR")
+                completed(nil, .invalidData)
             }
         }
         

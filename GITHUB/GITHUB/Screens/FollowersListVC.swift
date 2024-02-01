@@ -13,8 +13,6 @@ class FollowersListVC: UIViewController {
     // using this string to get the data from the pervious screen
     var userName: String!
 
-    
-    
     // MARK: - Lifecycles
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +22,7 @@ class FollowersListVC: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
         NetworkManager.shared.getFollowers(for: userName, page: 1) { followers, error in
             guard let followers = followers else {
-                self.presentGFAlertOnMainThread(alertTitle: "Bad Stuff Happened", message: error!, buttonTitle: "OK")
+                self.presentGFAlertOnMainThread(alertTitle: "Bad Stuff Happened", message: error!.rawValue, buttonTitle: "OK")
                 return
             }
             print("Followers.count = \(followers.count)")
