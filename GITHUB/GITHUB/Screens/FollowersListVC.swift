@@ -22,6 +22,14 @@ class FollowersListVC: UIViewController {
         navigationController?.isNavigationBarHidden = false
         // creating a large title
         navigationController?.navigationBar.prefersLargeTitles = true
+        NetworkManager.shared.getFollowers(for: userName, page: 1) { followers, error in
+            guard let followers = followers else {
+                self.presentGFAlertOnMainThread(alertTitle: "Bad Stuff Happened", message: error!, buttonTitle: "OK")
+                return
+            }
+            print("Followers.count = \(followers.count)")
+            print(followers)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
