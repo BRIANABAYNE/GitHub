@@ -10,6 +10,9 @@ import UIKit
 class FollowersListVC: UIViewController {
     
     // MARK: - Enum
+    // using this for DiffableDataSource - Hash function, takes in a value like a user Name and gives it a fixed value, similar to UUID. This datsource is using a hash function
+    
+    // ENUM are Hashable by default
     enum Section {
         case main
     }
@@ -19,7 +22,10 @@ class FollowersListVC: UIViewController {
     var userName: String!
     // initializing our collectionView
     var collectionView: UICollectionView!
+    // property for the dataSource
     var dataSource: UICollectionViewDiffableDataSource<Section, Follower>!
+    
+    //initialized an empty array of followers
     var followers: [Follower] = []
     
     // MARK: - Lifecycles
@@ -38,7 +44,7 @@ class FollowersListVC: UIViewController {
     }
     
     func configureCollectionView() {
-        collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: UICollectionViewFlowLayout())
+        collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createThreeColumnFlowLayout())
         // using the object that I initialized
         view.addSubview(collectionView)
         collectionView.backgroundColor = .systemBackground
@@ -51,9 +57,13 @@ class FollowersListVC: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
     }
     
+    // creating how the collectionView will look
     func createThreeColumnFlowLayout() -> UICollectionViewFlowLayout {
+        // the view is the total width of the VC
         let width = view.bounds.width
+        // the padding from the sides
         let padding: CGFloat = 12
+        // the padding around all sides
         let minimumItemSpacing: CGFloat = 10
         let availableWidth = width - (padding * 2) - (minimumItemSpacing * 2)
         let itemWidth = availableWidth / 3
@@ -69,16 +79,21 @@ class FollowersListVC: UIViewController {
             switch result {
             case .success(let followers):
                 self.followers = followers
+                // make sure we have the array of followers
                 self.updateData()
             case .failure(let error):
                 self.presentGFAlertOnMainThread(alertTitle: "Bad Stuff Happened", message: error.rawValue, buttonTitle: "OK")
             }
         }
     }
+    
     func configureDataSource() {
         dataSource = UICollectionViewDiffableDataSource<Section, Follower>(collectionView: collectionView, cellProvider: { (collectionView, indexPath, follower) -> UICollectionViewCell? in
+            // creating the cell - then type casting the cell with the cell I need "FollowerCell"
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FollowerCell.reuseID, for: indexPath) as! FollowerCell
+            // configure the cell with the follower
             cell.set(follower: follower)
+            // return the cell
             return cell
         })
     }
@@ -86,7 +101,9 @@ class FollowersListVC: UIViewController {
     func updateData() {
         var snapshot = NSDiffableDataSourceSnapshot<Section, Follower>()
         snapshot.appendSections([.main])
+        // creating from line 29
         snapshot.appendItems(followers)
+        // Make sure to always call on the main thread - all UI changes have to be on the main thread 
         DispatchQueue.main.async {
             self.dataSource.apply(snapshot, animatingDifferences: true)
         }
