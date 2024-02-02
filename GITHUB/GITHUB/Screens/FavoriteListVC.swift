@@ -9,6 +9,8 @@ import UIKit
 
 class FavoriteListVC: UIViewController {
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // system color will adapt to light mode and dark mode. 

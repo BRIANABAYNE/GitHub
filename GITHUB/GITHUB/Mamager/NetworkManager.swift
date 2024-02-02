@@ -9,7 +9,7 @@ import Foundation
 
 class NetworkManager {
     
-    // singlton - shared instance throughout the app - static mean we can access this property throughout the app.
+    // singleton - shared instance throughout the app - static mean we can access this property throughout the app.
     static let shared = NetworkManager()
     let baseURL = "https://api.github.com/users/"
     private init() {
