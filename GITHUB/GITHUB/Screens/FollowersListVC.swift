@@ -62,9 +62,12 @@ class FollowersListVC: UIViewController {
     
     func getFollowers(userName: String, page: Int) {
         // every time you are using weak self, it's going to make it optional, using weak self to handle the memory leaks, capture list = WEAK SELF - weak is optional
+        showLoadingView()
         NetworkManager.shared.getFollowers(for: userName, page: page) { [weak self] result in
+            
             // unwrapping the optional of self to remove all of the ? I added to self because weak self made self optional
             guard let self = self else { return }
+            self.dismissLoadingView()
             switch result {
             case .success(let followers):
                 if followers.count < 100 {self.hasMoreFollowers = false }
