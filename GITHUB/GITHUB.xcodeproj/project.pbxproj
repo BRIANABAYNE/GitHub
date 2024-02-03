@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3A5EFC392B6D80BB009381B5 /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5EFC382B6D80BB009381B5 /* UIHelper.swift */; };
+		3A5EFC422B6E9574009381B5 /* GFEmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5EFC412B6E9574009381B5 /* GFEmptyStateView.swift */; };
 		3A7469BB2B5742DD001A8024 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7469BA2B5742DD001A8024 /* AppDelegate.swift */; };
 		3A7469BD2B5742DD001A8024 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7469BC2B5742DD001A8024 /* SceneDelegate.swift */; };
 		3A7469BF2B5742DD001A8024 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7469BE2B5742DD001A8024 /* ViewController.swift */; };
@@ -32,6 +33,7 @@
 
 /* Begin PBXFileReference section */
 		3A5EFC382B6D80BB009381B5 /* UIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIHelper.swift; sourceTree = "<group>"; };
+		3A5EFC412B6E9574009381B5 /* GFEmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFEmptyStateView.swift; sourceTree = "<group>"; };
 		3A7469B72B5742DD001A8024 /* GITHUB.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GITHUB.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A7469BA2B5742DD001A8024 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3A7469BC2B5742DD001A8024 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -70,6 +72,7 @@
 		3A5EFC3C2B6E94AC009381B5 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				3A5EFC412B6E9574009381B5 /* GFEmptyStateView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -291,6 +294,7 @@
 				3A7469D92B588A63001A8024 /* FollowersListVC.swift in Sources */,
 				3A7469D32B583B13001A8024 /* GFButton.swift in Sources */,
 				3A7469BF2B5742DD001A8024 /* ViewController.swift in Sources */,
+				3A5EFC422B6E9574009381B5 /* GFEmptyStateView.swift in Sources */,
 				3A7469DF2B58CE61001A8024 /* GFAlertVC.swift in Sources */,
 				3A746A102B6971EF001A8024 /* User.swift in Sources */,
 				3A746A192B6C5681001A8024 /* FollowerCell.swift in Sources */,
