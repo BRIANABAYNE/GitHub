@@ -9,7 +9,8 @@ import UIKit
 
 class GFAvatarImageView: UIImageView {
                                            // using a bang here because I know I have the image in my supporting files.
-//   let placeholderImage = UIImage(named: "avatar-placeholder")!
+    let placeholderImage = UIImage(named: "avatar")!
+    let cache = NetworkManager.shared.cache
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -23,11 +24,20 @@ class GFAvatarImageView: UIImageView {
     private func configure() {
         layer.cornerRadius = 10
         clipsToBounds = true
-//        image = placeholderImage
+        image = placeholderImage
         translatesAutoresizingMaskIntoConstraints = false
     }
     
     func downloadImage(from urlString: String) {
+        
+        let cacheKey = NSString(string: urlString)
+        
+        
+        if let image = cache.object(forKey: cacheKey) {
+            self.image = image
+            return
+        }
+        
         guard let url = URL(string: urlString) else { return }
         let task = URLSession.shared.dataTask(with: url) { [weak self]  data, response, error in
             // guarding self because it now optional since I used weak self, weak self is always optional 
@@ -37,6 +47,7 @@ class GFAvatarImageView: UIImageView {
             guard let data = data else { return }
             
             guard let image = UIImage(data: data) else { return }
+            self.cache.setObject(image, forKey: cacheKey)
             
             DispatchQueue.main.async {
                 self.image = image

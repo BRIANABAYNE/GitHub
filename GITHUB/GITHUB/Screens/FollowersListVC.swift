@@ -24,6 +24,8 @@ class FollowersListVC: UIViewController {
     var collectionView: UICollectionView!
     // property for the dataSource
     var dataSource: UICollectionViewDiffableDataSource<Section, Follower>!
+    var page = 1
+    var hasMoreFollowers = true
     
     //initialized an empty array of followers
     var followers: [Follower] = []
@@ -34,7 +36,7 @@ class FollowersListVC: UIViewController {
         view.backgroundColor = .systemBackground
         configureCollectionView()
         configureViewController()
-        getFollowers()
+        getFollowers(userName: userName, page: page)
         configureDataSource()
     }
     
@@ -45,6 +47,7 @@ class FollowersListVC: UIViewController {
     
     func configureCollectionView() {
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: UIHelper.createThreeColumnFlowLayout(in: view))
+        collectionView.delegate = self
         // using the object that I initialized
         view.addSubview(collectionView)
         collectionView.backgroundColor = .systemBackground
@@ -57,14 +60,15 @@ class FollowersListVC: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
     }
     
-    func getFollowers() {
+    func getFollowers(userName: String, page: Int) {
         // every time you are using weak self, it's going to make it optional, using weak self to handle the memory leaks, capture list = WEAK SELF - weak is optional
-        NetworkManager.shared.getFollowers(for: userName, page: 1) { [weak self] result in
+        NetworkManager.shared.getFollowers(for: userName, page: page) { [weak self] result in
             // unwrapping the optional of self to remove all of the ? I added to self because weak self made self optional
             guard let self = self else { return }
             switch result {
             case .success(let followers):
-                self.followers = followers
+                if followers.count < 100 {self.hasMoreFollowers = false }
+                self.followers.append(contentsOf: followers)
                 // make sure we have the array of followers
                 self.updateData()
             case .failure(let error):
@@ -92,6 +96,21 @@ class FollowersListVC: UIViewController {
         // Make sure to always call on the main thread - all UI changes have to be on the main thread
         DispatchQueue.main.async {
             self.dataSource.apply(snapshot, animatingDifferences: true)
+        }
+    }
+}
+
+extension FollowersListVC: UICollectionViewDelegate {
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        let height = scrollView.frame.size.height
+        
+        if offsetY > contentHeight - height {
+            guard hasMoreFollowers else { return }
+            page += 1
+            getFollowers(userName: userName, page: page)
         }
     }
 }

@@ -5,13 +5,14 @@
 //  Created by Briana Bayne on 2/1/24.
 //
 
-import Foundation
+import UIKit
 
 class NetworkManager {
     
     // singleton - shared instance throughout the app - static mean we can access this property throughout the app.
     static let shared = NetworkManager()
-    let baseURL = "https://api.github.com/users/"
+    private let baseURL = "https://api.github.com/users/"
+    let cache = NSCache<NSString, UIImage>()
     private init() {
         
     }
