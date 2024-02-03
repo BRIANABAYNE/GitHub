@@ -67,6 +67,46 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3A5EFC3C2B6E94AC009381B5 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		3A5EFC3D2B6E94B3009381B5 /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				3A7469D22B583B13001A8024 /* GFButton.swift */,
+			);
+			path = Buttons;
+			sourceTree = "<group>";
+		};
+		3A5EFC3E2B6E94C2009381B5 /* TextFields */ = {
+			isa = PBXGroup;
+			children = (
+				3A7469D62B5854F9001A8024 /* GFTextField.swift */,
+			);
+			path = TextFields;
+			sourceTree = "<group>";
+		};
+		3A5EFC3F2B6E94D1009381B5 /* ImageViews */ = {
+			isa = PBXGroup;
+			children = (
+				3A746A1A2B6C5778001A8024 /* GFAvatarImageView.swift */,
+			);
+			path = ImageViews;
+			sourceTree = "<group>";
+		};
+		3A5EFC402B6E94E2009381B5 /* Lables */ = {
+			isa = PBXGroup;
+			children = (
+				3A7469DC2B58CD8B001A8024 /* GFBodyLabel.swift */,
+				3A7469DA2B58CBB3001A8024 /* GFTitleLabel.swift */,
+			);
+			path = Lables;
+			sourceTree = "<group>";
+		};
 		3A7469AE2B5742DD001A8024 = {
 			isa = PBXGroup;
 			children = (
@@ -111,13 +151,13 @@
 		3A746A092B696A5B001A8024 /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
+				3A5EFC402B6E94E2009381B5 /* Lables */,
+				3A5EFC3F2B6E94D1009381B5 /* ImageViews */,
+				3A5EFC3E2B6E94C2009381B5 /* TextFields */,
+				3A5EFC3D2B6E94B3009381B5 /* Buttons */,
+				3A5EFC3C2B6E94AC009381B5 /* Views */,
 				3A746A172B6C5658001A8024 /* Cells */,
-				3A7469DC2B58CD8B001A8024 /* GFBodyLabel.swift */,
-				3A7469DA2B58CBB3001A8024 /* GFTitleLabel.swift */,
-				3A7469D62B5854F9001A8024 /* GFTextField.swift */,
-				3A7469D22B583B13001A8024 /* GFButton.swift */,
 				3A7469DE2B58CE61001A8024 /* GFAlertVC.swift */,
-				3A746A1A2B6C5778001A8024 /* GFAvatarImageView.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
