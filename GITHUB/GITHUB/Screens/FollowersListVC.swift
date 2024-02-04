@@ -30,6 +30,8 @@ class FollowersListVC: UIViewController {
     //initialized an empty array of followers
     var followers: [Follower] = []
     
+    var filterFollowers: [Follower] = []
+    
     // MARK: - Lifecycles
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,6 +40,7 @@ class FollowersListVC: UIViewController {
         configureViewController()
         getFollowers(userName: userName, page: page)
         configureDataSource()
+        configureSearchController()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -52,6 +55,17 @@ class FollowersListVC: UIViewController {
         view.addSubview(collectionView)
         collectionView.backgroundColor = .systemBackground
         collectionView.register(FollowerCell.self, forCellWithReuseIdentifier: FollowerCell.reuseID)
+    }
+    
+    
+    func configureSearchController() {
+        let searchController = UISearchController()
+        searchController.searchResultsUpdater = self
+        searchController.searchBar.delegate = self
+        searchController.searchBar.placeholder = "Search for a username"
+        searchController.obscuresBackgroundDuringPresentation = false
+        navigationItem.searchController = searchController
+        
     }
     
     func configureViewController() {
@@ -75,7 +89,7 @@ class FollowersListVC: UIViewController {
                 // make sure we have the array of followers
                 
                 if self.followers.isEmpty {
-                    let message = "This user doesn't' have any followers. Go follow them! 🫶🏻🫶🏻"
+                    let message = "This user doesn't have any followers. Go follow them! 🫶🏻🫶🏻"
                     DispatchQueue.main.async {
                         self.callEmptyStateView(with: message, in: self.view)
                     }
@@ -83,7 +97,7 @@ class FollowersListVC: UIViewController {
                     return
                 }
                 
-                self.updateData()
+                self.updateData(on: self.followers)
             case .failure(let error):
                 self.presentGFAlertOnMainThread(alertTitle: "Bad Stuff Happened", message: error.rawValue, buttonTitle: "OK")
             }
@@ -101,7 +115,7 @@ class FollowersListVC: UIViewController {
         })
     }
     
-    func updateData() {
+    func updateData(on followers: [Follower]) {
         var snapshot = NSDiffableDataSourceSnapshot<Section, Follower>()
         snapshot.appendSections([.main])
         // creating from line 29
@@ -125,5 +139,20 @@ extension FollowersListVC: UICollectionViewDelegate {
             page += 1
             getFollowers(userName: userName, page: page)
         }
+    }
+}
+
+
+extension FollowersListVC: UISearchResultsUpdating, UISearchBarDelegate {
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let filter = searchController.searchBar.text, !filter.isEmpty else { return }
+        
+        filterFollowers = followers.filter { $0.login.lowercased().contains(filter.lowercased()) }
+        updateData(on: filterFollowers)
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        updateData(on: followers)
     }
 }
