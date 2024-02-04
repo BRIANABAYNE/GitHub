@@ -16,7 +16,7 @@ class NetworkManager {
     private init() {
         
     }
-    
+    // closures are either @escaping or not escaping - escaping can outlive this function "getfollowers" the closure can be called after a period of time. closure has to outlive the function, we go to the network, we get the data, the function is called and depending on the wifi, the function might have already happened so that's why we need at escaping, need time to get the data. CLOSUREs are none escaping by default -- At escaping is called after the function is called. 
     func getFollowers(for userName: String, page: Int, completed: @escaping (Result<[Follower], GFError>) -> Void) {
         let endpoint = baseURL + "\(userName)/followers?per_page=100&page=\(page)"
         // using guard let because it returns an optional
@@ -54,7 +54,7 @@ class NetworkManager {
     }
 
 
-func getUserInfo(for userName: String, completed: @escaping (Result<User, GFError>) -> Void) {
+   func getUserInfo(for userName: String, completed: @escaping (Result<User, GFError>) -> Void) {
     let endpoint = baseURL + "\(userName)"
     // using guard let because it returns an optional
     guard let url = URL(string: endpoint) else {

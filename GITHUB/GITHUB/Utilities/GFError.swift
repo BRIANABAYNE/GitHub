@@ -1,9 +1,10 @@
 //
-//  ErrorMessage.swift
+//  GFError.swift
 //  GITHUB
 //
-//  Created by Briana Bayne on 2/1/24.
+//  Created by Briana Bayne on 2/4/24.
 //
+
 
 import Foundation
 // the string is the raw value of the enum - confirming to the protocol "Error"
