@@ -78,6 +78,9 @@ class FollowersListVC: UIViewController {
         navigationController?.isNavigationBarHidden = false
         // creating a large title
         navigationController?.navigationBar.prefersLargeTitles = true
+        
+        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonTapped))
+        navigationItem.rightBarButtonItem = addButton
     }
     
     func getFollowers(userName: String, page: Int) {
@@ -119,6 +122,11 @@ class FollowersListVC: UIViewController {
             // return the cell
             return cell
         })
+    }
+    
+    
+    @objc func addButtonTapped() {
+        print("Button")
     }
     
     func updateData(on followers: [Follower]) {
