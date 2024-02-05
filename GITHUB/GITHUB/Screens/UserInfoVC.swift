@@ -25,7 +25,6 @@ class UserInfoVC: UIViewController {
     
     }
     
-    
     func configureViewController() {
         view.backgroundColor = .systemBackground
         let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dissMissVC))
@@ -44,7 +43,6 @@ class UserInfoVC: UIViewController {
                 self.presentGFAlertOnMainThread(alertTitle: "Something went wrong", message: error.rawValue, buttonTitle: "OKAY")
             }
         }
-        
     }
     
     func layoutUI() {
