@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import SafariServices
+
 
 // setting the protocol and giving the functions I need, step 1 - List of commands
 protocol UserInfoVCDelegate: class {
@@ -24,6 +24,7 @@ class UserInfoVC: UIViewController {
     var itemViews: [UIView] = []
     
     var userName: String!
+    weak var delegate: FollowerListVCDelegate! 
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -129,16 +130,17 @@ extension UserInfoVC: UserInfoVCDelegate {
             presentGFAlertOnMainThread(alertTitle: "Invalid URL", message: "The url attached to this user is invalid.", buttonTitle: "OKAY")
             return
         }
-
-        let safariVC = SFSafariViewController(url: url)
-        safariVC.preferredBarTintColor = .systemGreen
-        present(safariVC, animated: true)
+        
+        presentSafariVC(with: url)
     }
     
     func didTapGetFollowers(for user: User) {
-        //
+        guard user.followers != 0 else { presentGFAlertOnMainThread(alertTitle: "No followers", message: "This user has no followers. Go Follow Them <3 ", buttonTitle:"OKAY")
+            return
+        }
+        
+        delegate.didRequestFollowers(for: user.login)
+        dissMissVC()
     }
-    
- 
-    
+
 }
