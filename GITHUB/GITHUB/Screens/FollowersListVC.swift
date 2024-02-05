@@ -124,9 +124,8 @@ class FollowersListVC: UIViewController {
         })
     }
     
-    
     @objc func addButtonTapped() {
-        print("Button")
+      
     }
     
     func updateData(on followers: [Follower]) {
