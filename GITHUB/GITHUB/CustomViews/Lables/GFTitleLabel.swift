@@ -24,7 +24,7 @@ class GFTitleLabel: UILabel {
         super.init(frame: .zero)
         self.textAlignment = textAlignment
         self.font = UIFont.systemFont(ofSize: fontSize, weight: .bold)
-       //configure()
+        configure()
     }
     
     private func configure() {
