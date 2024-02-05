@@ -37,7 +37,6 @@ class GFItemInfoView: UIView {
        symbolImageView.contentMode = .scaleAspectFill
        symbolImageView.tintColor = .label
        
-       
        NSLayoutConstraint.activate([
         symbolImageView.topAnchor.constraint(equalTo: self.topAnchor),
         symbolImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
@@ -56,7 +55,6 @@ class GFItemInfoView: UIView {
     
        ])
     }
-    
     
     func set(itemInfoType: ItemInfoType, withCount count: Int) {
         switch itemInfoType {
