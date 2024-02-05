@@ -6,8 +6,16 @@
 //
 
 import UIKit
+import SafariServices
+
+// setting the protocol and giving the functions I need, step 1 - List of commands
+protocol UserInfoVCDelegate: class {
+    func didTapGitHubProfile()
+    func didTapGetFollowers()
+}
 
 class UserInfoVC: UIViewController {
+
     
     let headerView = UIView()
     let itemViewOne = UIView()
@@ -21,7 +29,6 @@ class UserInfoVC: UIViewController {
         super.viewDidLoad()
         configureViewController()
         getUserInfo()
-        
         layoutUI()
     
     }
@@ -38,15 +45,27 @@ class UserInfoVC: UIViewController {
             switch result {
             case .success(let user):
                 DispatchQueue.main.async {
-                    self.add(childVC: GFUserInfoHeaderVC(user: user), to: self.headerView)
-                    self.add(childVC: GFRepoVC(user: user), to: self.itemViewOne)
-                    self.add(childVC: GFFollowerVC(user: user), to: self.itemViewTwo)
-                    self.dateLabel.text = "GitHub member since \(user.createdAt.convertToDisplayFormat())"
+                    self.configureUIElements(with: user)
                 }
             case .failure(let error):
                 self.presentGFAlertOnMainThread(alertTitle: "Something went wrong", message: error.rawValue, buttonTitle: "OKAY")
             }
         }
+    }
+    
+    func configureUIElements(with user: User) {
+        
+        let repoItemVC = GFRepoVC(user: user)
+        repoItemVC.delegate = self
+        
+        let followerItemVC = GFFollowerVC(user: user)
+        followerItemVC.delegate = self
+        
+        
+        self.add(childVC: repoItemVC, to: self.itemViewOne)
+        self.add(childVC: followerItemVC, to: self.itemViewTwo)
+        self.add(childVC: GFFollowerVC(user: user), to: self.headerView)
+        self.dateLabel.text = "GitHub member since \(user.createdAt.convertToDisplayFormat())"
     }
     
     func layoutUI() {
@@ -55,7 +74,7 @@ class UserInfoVC: UIViewController {
         let itemHeight: CGFloat = 140
         let headerViewOne: CGFloat = 180
         
-        itemViews = [headerView, itemViewOne, itemViewTwo, dateLabel]
+        itemViews = [ itemViewOne, itemViewTwo, headerView, dateLabel]
         
         for items in itemViews {
             view.addSubview(items)
@@ -102,4 +121,17 @@ class UserInfoVC: UIViewController {
     @objc func dissMissVC() {
         dismiss(animated: true)
     }
+}
+
+extension UserInfoVC: UserInfoVCDelegate {
+    
+    func didTapGitHubProfile() {
+       guard let url = URL(S)
+    }
+    
+    func didTapGetFollowers() {
+        // dismisvc
+        // tell followers list screen to vc 
+    }
+    
 }
