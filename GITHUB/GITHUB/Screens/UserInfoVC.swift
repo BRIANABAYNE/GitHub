@@ -10,8 +10,8 @@ import SafariServices
 
 // setting the protocol and giving the functions I need, step 1 - List of commands
 protocol UserInfoVCDelegate: class {
-    func didTapGitHubProfile()
-    func didTapGetFollowers()
+    func didTapGitHubProfile(for user: User)
+    func didTapGetFollowers(for user: User)
 }
 
 class UserInfoVC: UIViewController {
@@ -124,14 +124,21 @@ class UserInfoVC: UIViewController {
 }
 
 extension UserInfoVC: UserInfoVCDelegate {
-    
-    func didTapGitHubProfile() {
-       guard let url = URL(S)
+    func didTapGitHubProfile(for user: User) {
+        guard let url = URL(string: user.htmlUrl) else {
+            presentGFAlertOnMainThread(alertTitle: "Invalid URL", message: "The url attached to this user is invalid.", buttonTitle: "OKAY")
+            return
+        }
+
+        let safariVC = SFSafariViewController(url: url)
+        safariVC.preferredBarTintColor = .systemGreen
+        present(safariVC, animated: true)
     }
     
-    func didTapGetFollowers() {
-        // dismisvc
-        // tell followers list screen to vc 
+    func didTapGetFollowers(for user: User) {
+        //
     }
+    
+ 
     
 }
