@@ -14,6 +14,7 @@ class SearchVC: UIViewController {
     let logoImageView = UIImageView()
     let userNameTextField = GFTextField()
     let callToActionButton = GFButton(backgroundColor: .systemGreen, title: "Get Followers")
+    var logoImageViewTopConstraint: NSLayoutConstraint!
     
     // MARK: - Computed Property
     var isUserNameEntered: Bool {
@@ -76,12 +77,17 @@ class SearchVC: UIViewController {
         // auto layout
         logoImageView.translatesAutoresizingMaskIntoConstraints = false
         logoImageView.image = UIImage(named: "gh-logo")
+        // || = OR
+        let topConstraintConstant: CGFloat = DeviceTypes.isiPhoneSE || DeviceTypes.isiPhone8Zoomed ? 20 : 80
+        
+        
+        logoImageViewTopConstraint = logoImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: topConstraintConstant)
+        logoImageViewTopConstraint.isActive = true
         
         // constraints - 4 constraints per object - an array of constraints
         // X,Y, Height, Width ( The 4 Constraints ) X is in the middle of the screen, Y is the
         NSLayoutConstraint.activate([
             // pinning to the top - to the safe area
-            logoImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 80),
             // centering it to the X (center this in the VIEW )
             // Y = top, X = side to side
             logoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),

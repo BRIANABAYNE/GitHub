@@ -34,47 +34,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // creating the ViewController - removing this to replace a tab bar controller
 //        window?.rootViewController = ViewController()
         
-        // creating the table controller - place holder for now - hold the navigation controller
-        window?.rootViewController = createTabBar()
+        // using the custom class that was made for the tabbar
+        window?.rootViewController = GFTabBarController()
         // will make the VC Visible on the screen
         window?.makeKeyAndVisible()
         configureNavigationBar()
     }
-    
-    func createSearchNC() -> UINavigationController {
-        // init the SearchVC
-        let searchVC  = SearchVC()
-        // giving it a title
-        searchVC.title = "Search"
-        // adding the system image
-        searchVC.tabBarItem = UITabBarItem(tabBarSystemItem: .search, tag: 0)
-        // returning a navigationController that we just created
-        return UINavigationController(rootViewController: searchVC)
 
-    }
-    
-      
-    func createFavoritesNC() -> UINavigationController {
-        // init the FavoriteListVC
-        let favoriteListVC = FavoriteListVC()
-        // Give it a title
-        favoriteListVC.title = "Favorites"
-        // tabbar and
-        favoriteListVC.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 1)
-        return UINavigationController(rootViewController: favoriteListVC)
-        
-    }
-    
-    func createTabBar() -> UITabBarController {
-        let tabbar = UITabBarController()
-        // the overall appearance of tabbar
-        UITabBar.appearance().tintColor = .systemGreen
-        // tabbar just created is the vc = an array of viewControllers
-        tabbar.viewControllers = [createSearchNC(), createFavoritesNC()]
-        
-        return tabbar
-    }
-    
     
     func configureNavigationBar() {
         // . appearance means overall - all navigation bars will have this systemGreen 
@@ -108,7 +74,5 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
     }
-
-
 }
 
