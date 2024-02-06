@@ -10,21 +10,82 @@ import UIKit
 class FavoriteListVC: UIViewController {
     
     
+    let tableView = UITableView()
+    var favorites: [Follower] = []
+    
+    // MARK: - Lifecycles
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // system color will adapt to light mode and dark mode. 
-        view.backgroundColor = .systemBlue
-        
-        PersistenceManager.retrieveFavorites { result in
+     
+        configureViewController()
+        configureTableView()
+     
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getFavorites()
+    }
+    
+    func configureTableView() {
+        // add the subview
+        view.addSubview(tableView)
+        // fill up the whole view
+        tableView.frame = view.bounds
+        // setting the rowHeight
+        tableView.rowHeight = 80
+        // setting up the tableview - tableview need the delegate and datasource
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(FavoriteCell.self, forCellReuseIdentifier: FavoriteCell.reuseID)
+    }
+    
+    
+    func configureViewController() {
+        view.backgroundColor = .systemBackground
+        title = "Favorites"
+        // making the text big on the navigation
+        navigationController?.navigationBar.prefersLargeTitles = true
+    }
+    
+    func getFavorites() {
+        PersistenceManager.retrieveFavorites { [weak self] result in
+            guard let self = self else { return }
             switch result {
             case .success(let favorites):
-                print(favorites)
+                
+                if favorites.isEmpty {
+                    self.callEmptyStateView(with: "No favorites? \nAdd one on the follower screen", in: self.view)
+                } else {
+                    self.favorites = favorites
+                    DispatchQueue.main.async {
+                        // call reload the tableView on the main thread
+                        self.tableView.reloadData()
+                        // edge case - empty case
+                        self.view.bringSubviewToFront(self.tableView)
+                    }
+                }
+                
             case .failure(let error):
-                break
+                self.presentGFAlertOnMainThread(alertTitle: "Something went wrong", message: error.rawValue, buttonTitle: "OKAY")
             }
         }
-        
+    }
+}
+
+extension FavoriteListVC: UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // number of rows in section - this will be different per user depending on how many favorites they have
+        return favorites.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: FavoriteCell.reuseID) as! FavoriteCell
+        let favorite = favorites[indexPath.row]
+        cell.set(favorite: favorite)
+        return cell
     }
     
 }
