@@ -16,6 +16,15 @@ class FavoriteListVC: UIViewController {
         // system color will adapt to light mode and dark mode. 
         view.backgroundColor = .systemBlue
         
+        PersistenceManager.retrieveFavorites { result in
+            switch result {
+            case .success(let favorites):
+                print(favorites)
+            case .failure(let error):
+                break
+            }
+        }
+        
     }
     
 }

@@ -9,7 +9,7 @@ import UIKit
 
 
 // setting the protocol and giving the functions I need, step 1 - List of commands
-protocol UserInfoVCDelegate: class {
+protocol UserInfoVCDelegate: AnyObject {
     func didTapGitHubProfile(for user: User)
     func didTapGetFollowers(for user: User)
 }
