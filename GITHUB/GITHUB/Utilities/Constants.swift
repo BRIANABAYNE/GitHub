@@ -25,6 +25,14 @@ enum ScreenSize {
 }
 
 
+
+enum Images {
+    
+    static let ghLogo = UIImage(named: "gh-logo")
+    static let emptyStateImage = UIImage(named: "empty-state-logo")
+}
+
+
 enum DeviceTypes {
     static let idiom                    = UIDevice.current.userInterfaceIdiom
     static let nativeScale              = UIScreen.main.nativeScale

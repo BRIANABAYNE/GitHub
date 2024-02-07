@@ -8,6 +8,7 @@
 import UIKit
 
 class GFTextField: UITextField {
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureText()
@@ -38,6 +39,8 @@ class GFTextField: UITextField {
         autocorrectionType = .no
         // costume the return type on the keyboard 
         returnKeyType = .go
+        // adds a X when typing to exit 
+        clearButtonMode = .whileEditing
         placeholder = "Enter a username"
         
     }

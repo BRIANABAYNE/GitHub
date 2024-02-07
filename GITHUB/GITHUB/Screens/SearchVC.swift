@@ -34,7 +34,10 @@ class SearchVC: UIViewController {
     // whenever you are overriding something, most of the time you will want to call the super. This is what happens every time view will appear
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        // makes the textfield blank, once you go back to that screen on the same run 
+        userNameTextField.text = ""
         navigationController?.setNavigationBarHidden(true, animated: true)
+        
     }
     
     // MARK: - Methods
@@ -49,7 +52,7 @@ class SearchVC: UIViewController {
     
     func createDismissKeyboardTapGuesture() {
         // what view is going to act on this action, textField is the first responder
-        let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
+        let tap = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
         view.addGestureRecognizer(tap)
     }
 
@@ -61,11 +64,10 @@ class SearchVC: UIViewController {
            presentGFAlertOnMainThread(alertTitle: "Empty Username", message: "Please enter a GitHub Username!", buttonTitle: "OKAY")
          return
         }
+        
+        userNameTextField.resignFirstResponder()
         // creating the class type where we want to send the data - creating the object
-        let followerListVC = FollowersListVC()
-        // the data we want to move to the next screen
-        followerListVC.userName = userNameTextField.text
-        followerListVC.title = userNameTextField.text
+        let followerListVC = FollowersListVC(userName: userNameTextField.text!)
         // navigation to slide in - pushing that VC onto the stack
         navigationController?.pushViewController(followerListVC, animated: true)
     }
@@ -76,7 +78,7 @@ class SearchVC: UIViewController {
         view.addSubview(logoImageView)
         // auto layout
         logoImageView.translatesAutoresizingMaskIntoConstraints = false
-        logoImageView.image = UIImage(named: "gh-logo")
+        logoImageView.image = Images.ghLogo
         // || = OR
         let topConstraintConstant: CGFloat = DeviceTypes.isiPhoneSE || DeviceTypes.isiPhone8Zoomed ? 20 : 80
         
