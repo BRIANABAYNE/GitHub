@@ -26,12 +26,17 @@ class FollowerCell: UICollectionViewCell {
     
     func set(follower: Follower) {
         userNameLabel.text = follower.login
-        avatarImageView.downloadImage(from: follower.avatarUrl)
+        NetworkManager.shared.downloadImage(from: follower.avatarUrl) { [weak self] image in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                self.avatarImageView.image = image
+            }
+        }
     }
     
     private func configure() {
-        addSubview(userNameLabel)
         addSubview(avatarImageView)
+        addSubview(userNameLabel)
         
         let padding: CGFloat = 8
         // setting up the collectionView cell - the image and the label that's going under it
