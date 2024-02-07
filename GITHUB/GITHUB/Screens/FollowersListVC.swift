@@ -12,7 +12,7 @@ protocol FollowerListVCDelegate: class {
     func didRequestFollowers(for userName: String)
 }
 
-class FollowersListVC: UIViewController {
+class FollowersListVC: DataLoadingVC {
     
     // MARK: - Enum
     // using this for DiffableDataSource - Hash function, takes in a value like a user Name and gives it a fixed value, similar to UUID. This datsource is using a hash function

@@ -14,7 +14,7 @@ protocol UserInfoVCDelegate: AnyObject {
     func didTapGetFollowers(for user: User)
 }
 
-class UserInfoVC: UIViewController {
+class UserInfoVC: DataLoadingVC {
 
     
     let headerView = UIView()
