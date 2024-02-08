@@ -8,9 +8,7 @@
 import UIKit
 
 
-protocol FollowerListVCDelegate: AnyObject {
-    func didRequestFollowers(for userName: String)
-}
+
 
 class FollowersListVC: DataLoadingVC {
     
@@ -220,7 +218,7 @@ extension FollowersListVC: UISearchResultsUpdating {
     }
 }
 
-extension FollowersListVC: FollowerListVCDelegate {
+extension FollowersListVC: UserInfoVCDelegate {
     
     func didRequestFollowers(for userName: String) {
         self.userName = userName

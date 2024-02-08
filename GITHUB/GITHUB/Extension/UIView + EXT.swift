@@ -11,7 +11,7 @@ import UIKit
 
 extension UIView {
     
-    /// Variadic Parameters
+    /// Variadic Parameters - Converts into an array
     func addSubviews(_ views: UIView...) {
         for view in views {
             addSubview(view)

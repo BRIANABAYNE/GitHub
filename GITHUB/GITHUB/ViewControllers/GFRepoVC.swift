@@ -8,6 +8,12 @@
 import UIKit
 
 
+
+protocol GFRepoItemVCDelegate: AnyObject {
+    
+    func didTapGitFollowers(for user: User)
+}
+
 class GFRepoVC: GFItemInfoVC {
     
     // MARK: - Lifecycles
@@ -16,6 +22,8 @@ class GFRepoVC: GFItemInfoVC {
         super.viewDidLoad()
         configureItems()
     }
+    
+    weak var delegate: GFRepoItemVCDelegate!
     
     // MARK: - Methods
     
@@ -27,7 +35,7 @@ class GFRepoVC: GFItemInfoVC {
     }
     
     override func actionButtonTapped() {
-        delegate.didTapGetFollowers(for: user)
+        delegate.didTapGitFollowers(for: user)
     }
     
 }
