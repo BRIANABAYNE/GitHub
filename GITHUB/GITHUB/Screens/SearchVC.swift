@@ -29,6 +29,7 @@ class SearchVC: UIViewController {
         // calling this to use for either dark mode or light mode , will adapt
         view.backgroundColor = .systemBackground
         helperFunction()
+        view.addSubviews(logoImageView,userNameTextField,callToActionButton)
     }
     
     // whenever you are overriding something, most of the time you will want to call the super. This is what happens every time view will appear
@@ -74,8 +75,7 @@ class SearchVC: UIViewController {
     
     
     func configureLogoImageView() {
-        // calling our property that I made on line 14 inside of the subView
-        view.addSubview(logoImageView)
+
         // auto layout
         logoImageView.translatesAutoresizingMaskIntoConstraints = false
         logoImageView.image = Images.ghLogo
@@ -101,8 +101,7 @@ class SearchVC: UIViewController {
     }
     
     func configureTextField() {
-        // passing in the property that was made on line 15
-        view.addSubview(userNameTextField)
+     
         userNameTextField.delegate = self
         NSLayoutConstraint.activate([
             // pinning it to the bottom of the logoImageView with 48 - Y
@@ -117,8 +116,6 @@ class SearchVC: UIViewController {
     }
     
     func configureCallToActionButton() {
-        // This is actually putting the button on the screen
-        view.addSubview(callToActionButton)
         // Whenever we tap the callToAction button, the pushFollowersListVC will be called. TouchupInside is the type of action the button will take
         callToActionButton.addTarget(self, action: #selector(pushFollowersListVC), for: .touchUpInside)
 

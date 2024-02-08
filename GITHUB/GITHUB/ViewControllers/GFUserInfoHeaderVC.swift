@@ -64,12 +64,14 @@ class GFUserInfoHeaderVC: UIViewController {
     }
     
     func addSubView() {
-        view.addSubview(avatarImageView)
-        view.addSubview(userNameLabel)
-        view.addSubview(nameLabel)
-        view.addSubview(locationImageView)
-        view.addSubview(locationLabel)
-        view.addSubview(bioLabel)
+        view.addSubviews(avatarImageView, userNameLabel, nameLabel, locationImageView, locationLabel, bioLabel)
+        // replacing all these lines of code with one line of code. Leaving in here so my future self remembers.
+//        view.addSubview(avatarImageView)
+//        view.addSubview(userNameLabel)
+//        view.addSubview(nameLabel)
+//        view.addSubview(locationImageView)
+//        view.addSubview(locationLabel)
+//        view.addSubview(bioLabel)
     }
     
     func layoutUI() {

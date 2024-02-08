@@ -35,9 +35,9 @@ class FollowerCell: UICollectionViewCell {
     }
     
     private func configure() {
-        addSubview(avatarImageView)
-        addSubview(userNameLabel)
         
+        addSubviews(avatarImageView,userNameLabel)
+    
         let padding: CGFloat = 8
         // setting up the collectionView cell - the image and the label that's going under it
         NSLayoutConstraint.activate([
