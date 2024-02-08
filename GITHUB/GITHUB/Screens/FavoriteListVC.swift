@@ -39,6 +39,8 @@ class FavoriteListVC: DataLoadingVC {
         // setting up the tableview - tableview need the delegate and datasource
         tableView.delegate = self
         tableView.dataSource = self
+        /// Removes the empty cells on the TableView 
+        tableView.removeExcessCells()
         tableView.register(FavoriteCell.self, forCellReuseIdentifier: FavoriteCell.reuseID)
     }
     
@@ -101,14 +103,18 @@ extension FavoriteListVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         // swipe to delete
         guard editingStyle == .delete else { return }
-        // array of favorites
-        let favorite = favorites[indexPath.row]
-        favorites.remove(at: indexPath.row)
-        tableView.deleteRows(at: [indexPath], with: .left)
-        
-        PersistenceManager.updateWith(favorite: favorite, actionType: .remove) { [weak self] error in
+       
+        PersistenceManager.updateWith(
+            favorite: favorites[indexPath.row],
+            actionType: .remove) {
+            [weak self] error in
             guard let self = self else { return }
-            guard let error = error else { return }
+            guard let error = error else { 
+                self.favorites.remove(at: indexPath.row)
+                tableView.deleteRows(at: [indexPath], with: .left)
+                return
+            }
+            
             self.presentGFAlertOnMainThread(alertTitle: "Unable to remove", message: error.rawValue, buttonTitle: "OKAY")
         }
     }

@@ -29,28 +29,28 @@ enum PersistenceManager {
     ){
         retrieveFavorites { result in
             switch result {
-            case .success(let favorites):
+            case .success(var favorites):
                 // adding a temp array
-                var retrievedFavorites = favorites
+//                var retrievedFavorites = favorites
                 // switching on two types, case add or case remove
                 switch actionType {
                 case .add:
                     // don't add a favorite if it already is in the favorites. Make sure it doens't contain that favorite
-                    guard !retrievedFavorites.contains(favorite) else {
+                    guard !favorites.contains(favorite) else {
                         // completion with an alert that says, that person is already added to your favorites -
                         // return out of the function
                         completion(.alreadyInFavorites)
                         return
                     }
                     // if that user isn't already favorited, then adding that person to the favorite array "append, equals add"
-                    retrievedFavorites.append(favorite)
+                    favorites.append(favorite)
                     
                 case .remove:
                     // removing the favorite - $0 is each item iterating through the array - remove any instance where the login equals the favorites, thats where it will be removed - swipe to delete
-                    retrievedFavorites.removeAll { $0.login == favorite.login }
+                    favorites.removeAll { $0.login == favorite.login }
                 }
-                // saving the array of favorites to userDefaults 
-                completion(save(favorites: retrievedFavorites))
+                // saving the array of favorites to userDefaults
+                completion(save(favorites: favorites))
                 
             case .failure(let error):
                 completion(error)

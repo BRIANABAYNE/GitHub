@@ -52,17 +52,10 @@ class UserInfoVC: DataLoadingVC {
     }
     
     func configureUIElements(with user: User) {
-        
-        let repoItemVC = GFRepoVC(user: user)
-        repoItemVC.delegate = self
-        
-        let followerItemVC = GFFollowerVC(user: user)
-        followerItemVC.delegate = self
-        
-        
-        self.add(childVC: repoItemVC, to: self.itemViewOne)
-        self.add(childVC: followerItemVC, to: self.itemViewTwo)
-        self.add(childVC: GFFollowerVC(user: user), to: self.headerView)
+     
+        self.add(childVC: GFRepoVC(user: user, delegate: self), to: self.itemViewOne)
+        self.add(childVC: GFFollowerVC(user: user, delegate: self), to: self.itemViewTwo)
+        self.add(childVC: GFUserInfoHeaderVC(user: user), to: self.headerView)
         self.dateLabel.text = "GitHub member since \(user.createdAt.convertToMonthYearFormat())"
     }
     
@@ -123,20 +116,20 @@ class UserInfoVC: DataLoadingVC {
 
 
 extension UserInfoVC: GFRepoItemVCDelegate {
-    
-    func didTapGitFollowers(for user: User) {
-        guard let url = URL(string: user.htmlUrl) else {
-            presentGFAlertOnMainThread(
-                alertTitle: "Invalid URL",
-                message: "The url attached to this user is invalid.",
-                buttonTitle: "OKAY")
-            return
+    func didTapGitHubProfile(for user: User) {
+            guard let url = URL(string: user.htmlUrl) else {
+                presentGFAlertOnMainThread(
+                    alertTitle: "Invalid URL",
+                    message: "The url attached to this user is invalid.",
+                    buttonTitle: "OKAY")
+                return
+            }
+            
+            presentSafariVC(with: url)
         }
-        
-        presentSafariVC(with: url)
-    }
     
-}
+    }
+
 
 extension UserInfoVC: GFFollowersVCDelegate {
     
