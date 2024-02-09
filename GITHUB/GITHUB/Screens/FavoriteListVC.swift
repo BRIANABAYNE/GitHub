@@ -57,24 +57,31 @@ class FavoriteListVC: DataLoadingVC {
             guard let self = self else { return }
             switch result {
             case .success(let favorites):
-                
-                if favorites.isEmpty {
-                    self.callEmptyStateView(with: "No favorites? \nAdd one on the follower screen", in: self.view)
-                } else {
-                    self.favorites = favorites
-                    DispatchQueue.main.async {
-                        // call reload the tableView on the main thread
-                        self.tableView.reloadData()
-                        // edge case - empty case
-                        self.view.bringSubviewToFront(self.tableView)
-                    }
-                }
-                
+                self.updateUI(with: favorites)
             case .failure(let error):
                 self.presentGFAlertOnMainThread(alertTitle: "Something went wrong", message: error.rawValue, buttonTitle: "OKAY")
             }
         }
     }
+    
+    
+    func updateUI(with favorites: [Follower]) {
+        
+        if favorites.isEmpty {
+              callEmptyStateView(with: "No favorites? \nAdd one on the follower screen", in: self.view)
+        } else {
+            self.favorites = favorites
+            DispatchQueue.main.async {
+                // call reload the tableView on the main thread
+                self.tableView.reloadData()
+                // edge case - empty case
+                self.view.bringSubviewToFront(self.tableView)
+            }
+        }
+        
+        
+    }
+    
 }
 
 extension FavoriteListVC: UITableViewDataSource, UITableViewDelegate {
@@ -93,9 +100,9 @@ extension FavoriteListVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let favorite = favorites[indexPath.row]
         let destinationVC = FollowersListVC(userName: favorite.login)
-        destinationVC.userName = favorite.login
-        destinationVC.title = favorite.login
-        
+//        destinationVC.userName = favorite.login
+//        destinationVC.title = favorite.login
+//        
         // pushing the navigation onto the stack
         navigationController?.pushViewController(destinationVC, animated: true)
     }

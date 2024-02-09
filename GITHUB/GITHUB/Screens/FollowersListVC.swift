@@ -107,21 +107,7 @@ class FollowersListVC: DataLoadingVC {
             
             switch result {
             case .success(let followers):
-                if followers.count < 100 { self.hasMoreFollowers = false }
-                self.followers.append(contentsOf: followers)
-                // make sure we have the array of followers
-                
-                if self.followers.isEmpty {
-                    let message = "This user doesn't have any followers. Go follow them! 🫶🏻🫶🏻"
-                    DispatchQueue.main.async {
-                        self.callEmptyStateView(with: message, in: self.view)
-                        return
-                    }
-                    
-                }
-                
-                self.updateData(on: self.followers)
-                
+                self.updateUI(with: followers)
                 
             case .failure(let error):
                 self.presentGFAlertOnMainThread(alertTitle: "Bad Stuff Happened", message: error.rawValue, buttonTitle: "OK")
@@ -130,6 +116,25 @@ class FollowersListVC: DataLoadingVC {
             self.isLoadingMoreFollowers = false
         }
     }
+    
+
+    func updateUI(with followers: [Follower]) {
+        if followers.count < 100 { self.hasMoreFollowers = false }
+        self.followers.append(contentsOf: followers)
+        // make sure we have the array of followers
+        
+        if self.followers.isEmpty {
+            let message = "This user doesn't have any followers. Go follow them! 🫶🏻🫶🏻"
+            DispatchQueue.main.async {
+                self.callEmptyStateView(with: message, in: self.view)
+                return
+            }
+            
+        }
+        
+        self.updateData(on: self.followers)
+    }
+    
     
     func configureDataSource() {
         dataSource = UICollectionViewDiffableDataSource<Section, Follower>(collectionView: collectionView, cellProvider: { (collectionView, indexPath, follower) -> UICollectionViewCell? in
@@ -149,20 +154,7 @@ class FollowersListVC: DataLoadingVC {
             self.dismissLoadingView()
             switch result {
             case .success(let user):
-                
-                let favorite = Follower(login: user.login, avatarUrl: user.avatarUrl)
-                
-                PersistenceManager.updateWith(favorite: favorite, actionType: .add) { [weak self] error in
-                    guard let self = self else { return }
-                    guard let error = error else  {
-                        self.presentGFAlertOnMainThread(alertTitle: "Success!", message: "You have successfully favorited this user! ", buttonTitle: "YAYA")
-                        return
-                    }
-                    
-                    self.presentGFAlertOnMainThread(alertTitle: "Something went wrong", message: error.rawValue, buttonTitle: "OKAY")
-                }
-                
-                
+                self.addUserToFavorites(user: user)
             case .failure(let error):
                 self.presentGFAlertOnMainThread(alertTitle: "Something went wrong", message: error.rawValue, buttonTitle: "OKAY")
             }
@@ -178,7 +170,29 @@ class FollowersListVC: DataLoadingVC {
         DispatchQueue.main.async {
             self.dataSource.apply(snapshot, animatingDifferences: true)
         }
+        
+
     }
+    
+    
+    func addUserToFavorites(user: User) {
+        let favorite = Follower(login: user.login, avatarUrl: user.avatarUrl)
+        
+        PersistenceManager.updateWith(favorite: favorite, actionType: .add) { [weak self] error in
+            guard let self = self else { return }
+            guard let error = error else  {
+                self.presentGFAlertOnMainThread(alertTitle: "Success!", message: "You have successfully favorited this user! ", buttonTitle: "YAYA")
+                return
+            }
+            
+            self.presentGFAlertOnMainThread(alertTitle: "Something went wrong", message: error.rawValue, buttonTitle: "OKAY")
+        }
+        
+    }
+    
+    
+    
+    
 }
 
 extension FollowersListVC: UICollectionViewDelegate {
