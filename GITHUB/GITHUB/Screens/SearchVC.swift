@@ -29,7 +29,7 @@ class SearchVC: UIViewController {
         // calling this to use for either dark mode or light mode , will adapt
         view.backgroundColor = .systemBackground
         helperFunction()
-        view.addSubviews(logoImageView,userNameTextField,callToActionButton)
+//        view.addSubviews(logoImageView,userNameTextField,callToActionButton)
     }
     
     // whenever you are overriding something, most of the time you will want to call the super. This is what happens every time view will appear
@@ -44,6 +44,9 @@ class SearchVC: UIViewController {
     // MARK: - Methods
     
     func helperFunction() {
+        view.addSubview(logoImageView)
+        view.addSubview(userNameTextField)
+        view.addSubview(callToActionButton)
         configureLogoImageView()
         configureTextField()
         configureCallToActionButton()
@@ -81,7 +84,7 @@ class SearchVC: UIViewController {
         logoImageView.image = Images.ghLogo
         // || = OR
         let topConstraintConstant: CGFloat = DeviceTypes.isiPhoneSE || DeviceTypes.isiPhone8Zoomed ? 20 : 80
-    
+        let padding: CGFloat = 20
         
         // constraints - 4 constraints per object - an array of constraints
         // X,Y, Height, Width ( The 4 Constraints ) X is in the middle of the screen, Y is the
@@ -103,8 +106,8 @@ class SearchVC: UIViewController {
         userNameTextField.delegate = self
         NSLayoutConstraint.activate([
             // pinning it to the bottom of the logoImageView with 48 - Y
-            userNameTextField.topAnchor.constraint(equalTo: logoImageView.bottomAnchor,constant: 48),
             // adding the constraints to each side
+            userNameTextField.topAnchor.constraint(equalTo: logoImageView.bottomAnchor,constant: 48),
             userNameTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 50),
             userNameTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50),
             // apple says buttons should be at least 44 points high per the human interface guidelines
