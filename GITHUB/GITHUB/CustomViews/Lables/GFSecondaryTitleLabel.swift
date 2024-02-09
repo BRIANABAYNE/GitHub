@@ -26,7 +26,7 @@ class GFSecondaryTitleLabel: UILabel {
     }
     
     private func configure() {
-        textColor = .label
+        textColor = .secondaryLabel
         adjustsFontSizeToFitWidth = true
         minimumScaleFactor = 0.90
         // will break it up if it's to line

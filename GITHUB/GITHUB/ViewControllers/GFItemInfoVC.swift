@@ -7,7 +7,9 @@
 
 import UIKit
 
-
+protocol ItemInfoVCDelegate: AnyObject {
+    
+}
 
 
 /// Parent ViewController 
@@ -21,6 +23,8 @@ class GFItemInfoVC: UIViewController {
     let actionButton = GFButton()
     
     var user: User!
+    
+    // MARK: - Methods
     
     init(user: User) {
         super.init(nibName: nil, bundle: nil)

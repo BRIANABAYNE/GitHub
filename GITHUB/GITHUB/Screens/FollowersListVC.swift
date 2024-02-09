@@ -31,6 +31,9 @@ class FollowersListVC: DataLoadingVC {
     var hasMoreFollowers = true
     var isSearching = false
     var isLoadingMoreFollowers = false
+    var followers: [Follower] = []
+    
+    var filterFollowers: [Follower] = []
     
     
     init(userName: String) {
@@ -44,19 +47,16 @@ class FollowersListVC: DataLoadingVC {
     }
     
     //initialized an empty array of followers
-    var followers: [Follower] = []
-    
-    var filterFollowers: [Follower] = []
     
     // MARK: - Lifecycles
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         configureCollectionView()
+        configureSearchController()
         configureViewController()
         getFollowers(userName: userName, page: page)
         configureDataSource()
-        configureSearchController()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -66,10 +66,10 @@ class FollowersListVC: DataLoadingVC {
     
     func configureCollectionView() {
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: UIHelper.createThreeColumnFlowLayout(in: view))
-        collectionView.delegate = self
-        // using the object that I initialized
         view.addSubview(collectionView)
+        collectionView.delegate = self
         collectionView.backgroundColor = .systemBackground
+        // using the object that I initialized
         collectionView.register(FollowerCell.self, forCellWithReuseIdentifier: FollowerCell.reuseID)
     }
     
@@ -84,9 +84,10 @@ class FollowersListVC: DataLoadingVC {
     }
     
     func configureViewController() {
-        navigationController?.isNavigationBarHidden = false
-        // creating a large title
+        view.backgroundColor = .systemBackground
         navigationController?.navigationBar.prefersLargeTitles = true
+//        navigationController?.isNavigationBarHidden = false
+        // creating a large title
         
         let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonTapped))
         navigationItem.rightBarButtonItem = addButton
@@ -96,14 +97,17 @@ class FollowersListVC: DataLoadingVC {
         // every time you are using weak self, it's going to make it optional, using weak self to handle the memory leaks, capture list = WEAK SELF - weak is optional
         showLoadingView()
         isLoadingMoreFollowers = true
+        
+        
         NetworkManager.shared.getFollowers(for: userName, page: page) { [weak self] result in
             
             // unwrapping the optional of self to remove all of the ? I added to self because weak self made self optional
             guard let self = self else { return }
             self.dismissLoadingView()
+            
             switch result {
             case .success(let followers):
-                if followers.count < 100 {self.hasMoreFollowers = false }
+                if followers.count < 100 { self.hasMoreFollowers = false }
                 self.followers.append(contentsOf: followers)
                 // make sure we have the array of followers
                 
@@ -111,12 +115,14 @@ class FollowersListVC: DataLoadingVC {
                     let message = "This user doesn't have any followers. Go follow them! 🫶🏻🫶🏻"
                     DispatchQueue.main.async {
                         self.callEmptyStateView(with: message, in: self.view)
+                        return
                     }
                     
-                    return
                 }
                 
                 self.updateData(on: self.followers)
+                
+                
             case .failure(let error):
                 self.presentGFAlertOnMainThread(alertTitle: "Bad Stuff Happened", message: error.rawValue, buttonTitle: "OK")
             }

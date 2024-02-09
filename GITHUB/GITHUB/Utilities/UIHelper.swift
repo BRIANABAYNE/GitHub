@@ -8,7 +8,6 @@
 import UIKit
 
 enum UIHelper {
-    
     // creating how the collectionView will look
     static func createThreeColumnFlowLayout(in view: UIView) -> UICollectionViewFlowLayout {
         // the view is the total width of the VC
@@ -23,6 +22,7 @@ enum UIHelper {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.sectionInset = UIEdgeInsets(top: padding, left: padding, bottom: padding, right: padding)
         flowLayout.itemSize = CGSize(width: itemWidth, height: itemWidth + 40)
+        
         return flowLayout
     }
 }

@@ -10,6 +10,7 @@ import UIKit
 class NetworkManager {
     
     // singleton - shared instance throughout the app - static mean we can access this property throughout the app.
+
     static let shared = NetworkManager()
     private let baseURL = "https://api.github.com/users/"
     let cache = NSCache<NSString, UIImage>()
@@ -44,7 +45,7 @@ class NetworkManager {
                 // decoding from snake case from our model - instead of using coding keys in our model.
                 decoder.keyDecodingStrategy = .convertFromSnakeCase
                 // super common to see .iso8601 - taking a certain object and turning it into a date - this is now taking care of our date, I no longer need that string extension because this taking the format of yyyy-MM-dd'T'HH:mm:ssZ and translating it into a date
-                decoder.dateDecodingStrategy = .iso8601
+               // decoder.dateDecodingStrategy = .iso8601
                 let followers = try decoder.decode([Follower].self, from: data)
                 completed(.success(followers))
             } catch {
@@ -82,6 +83,7 @@ class NetworkManager {
             do { let decoder = JSONDecoder()
                 // decoding from snake case from our model - instead of using coding keys in our model.
                 decoder.keyDecodingStrategy = .convertFromSnakeCase
+                decoder.dateDecodingStrategy = .iso8601
                 let user = try decoder.decode(User.self, from: data)
                 completed(.success(user))
             } catch {
@@ -99,7 +101,6 @@ class NetworkManager {
     func downloadImage(from urlString: String, completion: @escaping (UIImage?) -> Void) {
         
         let cacheKey = NSString(string: urlString)
-        
         
         if let image = cache.object(forKey: cacheKey) {
             completion(image)
@@ -124,8 +125,7 @@ class NetworkManager {
             }
             
             self.cache.setObject(image, forKey: cacheKey)
-            
-             completion(nil)
+             completion(image)
             }
             // what actually calls the URLSESSION
             task.resume()
