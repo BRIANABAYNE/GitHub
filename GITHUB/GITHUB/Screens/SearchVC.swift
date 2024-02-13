@@ -84,7 +84,7 @@ class SearchVC: UIViewController {
         logoImageView.image = Images.ghLogo
         // || = OR
         let topConstraintConstant: CGFloat = DeviceTypes.isiPhoneSE || DeviceTypes.isiPhone8Zoomed ? 20 : 80
-        let padding: CGFloat = 20
+//        let padding: CGFloat = 20
         
         // constraints - 4 constraints per object - an array of constraints
         // X,Y, Height, Width ( The 4 Constraints ) X is in the middle of the screen, Y is the
