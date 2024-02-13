@@ -13,15 +13,24 @@ extension UIViewController {
     
     // MARK: - Method
     
-    func presentGFAlertOnMainThread(alertTitle: String, message: String, buttonTitle: String) {
-        DispatchQueue.main.async {
-            let alertVC = GFAlertVC(alertTitle: alertTitle, message: message, buttonTitle: buttonTitle)
-            alertVC.modalPresentationStyle = .overFullScreen
-            // fade in
-            alertVC.modalTransitionStyle = .crossDissolve
-            self.present(alertVC, animated: true)
-        }
+    func presentGFAlert(alertTitle: String, message: String, buttonTitle: String) {
+        let alertVC = GFAlertVC(alertTitle: alertTitle, message: message, buttonTitle: buttonTitle)
+        alertVC.modalPresentationStyle = .overFullScreen
+        // fade in
+        alertVC.modalTransitionStyle = .crossDissolve
+        present(alertVC, animated: true)
     }
+    
+    func presentDefaultError() {
+    let alertVC = GFAlertVC(alertTitle: "Something went wrong",
+                        message: "We were unable to complete your task at this time. Please try again",
+                             buttonTitle: "OK")
+        alertVC.modalPresentationStyle = .overFullScreen
+        // fade in
+        alertVC.modalTransitionStyle = .crossDissolve
+        present(alertVC, animated: true)
+    }
+    
     
     
     func presentSafariVC(with url: URL) {

@@ -98,23 +98,55 @@ class FollowersListVC: DataLoadingVC {
         showLoadingView()
         isLoadingMoreFollowers = true
         
-        
-        NetworkManager.shared.getFollowers(for: userName, page: page) { [weak self] result in
-            
-            // unwrapping the optional of self to remove all of the ? I added to self because weak self made self optional
-            guard let self = self else { return }
-            self.dismissLoadingView()
-            
-            switch result {
-            case .success(let followers):
-                self.updateUI(with: followers)
+        // Task puts you into a concurrency context - this is Structured
+        Task {
+            do {
+                // success
+                let followers = try await NetworkManager.shared.getFollowers(for: userName, page: page)
+                updateUI(with: followers)
+                dismissLoadingView()
+            } catch {
+                // handle the error here
+                if let gfError = error as? GFError {
+                    presentGFAlert(alertTitle: "Bad Stuff Happened", message: gfError.rawValue, buttonTitle: "OK")
+                } else {
+                    presentDefaultError()
+                }
                 
-            case .failure(let error):
-                self.presentGFAlertOnMainThread(alertTitle: "Bad Stuff Happened", message: error.rawValue, buttonTitle: "OK")
+                dismissLoadingView()
             }
-            
-            self.isLoadingMoreFollowers = false
         }
+        
+        
+        /// If I didn't have a custom error, I would handle the code this way - INSIDE of the TASK
+//        guard let followers = try ? await NetworkManager.shared.getFollowers(userName: userName, page: page) else {
+//            presentDefaultError()
+//            dismissLoadingView()
+//            return
+//        }
+//        
+//        updateUI(with: followers)
+//        dismissLoadingView()
+//        
+//    }
+        
+/// OLD WAY - Not Structured
+//        NetworkManager.shared.getFollowers(for: userName, page: page) { [weak self] result in
+//            
+//            // unwrapping the optional of self to remove all of the ? I added to self because weak self made self optional
+//            guard let self = self else { return }
+//            self.dismissLoadingView()
+//            
+//            switch result {
+//            case .success(let followers):
+//                self.updateUI(with: followers)
+//                
+//            case .failure(let error):
+//                self.presentGFAlertOnMainThread(alertTitle: "Bad Stuff Happened", message: error.rawValue, buttonTitle: "OK")
+//            }
+//            
+//            self.isLoadingMoreFollowers = false
+//        }
     }
     
 

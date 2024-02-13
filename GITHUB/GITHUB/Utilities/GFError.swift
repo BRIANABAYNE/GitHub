@@ -17,4 +17,5 @@ enum GFError: String, Error {
     case invalidData = "The data received from the server was invalid. Please try again."
     case unableToFavorite = "There was an error favoriting this user. Please try again"
     case alreadyInFavorites = "This user is already favorited"
+    case invalidImage = "Was unable to fetch the image"
 }

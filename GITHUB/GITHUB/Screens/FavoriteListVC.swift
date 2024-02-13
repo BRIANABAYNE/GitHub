@@ -122,7 +122,7 @@ extension FavoriteListVC: UITableViewDataSource, UITableViewDelegate {
                 return
             }
             
-            self.presentGFAlertOnMainThread(alertTitle: "Unable to remove", message: error.rawValue, buttonTitle: "OKAY")
+             presentGFAlert(alertTitle: "Bad Stuff Happened", message: error.rawValue, buttonTitle: "OKAY")
         }
     }
 }
