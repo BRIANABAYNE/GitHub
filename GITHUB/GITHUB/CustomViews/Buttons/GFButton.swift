@@ -30,24 +30,20 @@ class GFButton: UIButton {
     
  convenience init(backgroundColor: UIColor, title: String) {
         self.init(frame: .zero)
-        self.backgroundColor = backgroundColor
-        self.setTitle(title, for: .normal)
-
-  
+       set(color: backgroundColor, title: title)
     }
     
     private func configure() {
-        layer.cornerRadius = 10
-        setTitleColor(.white, for: .normal)
-        // using this for a dynamic type font, dynamic type is where the user can change the size of the font in their phone. If you don't use a dynamic type font, the user will not be able to change the font size. This is something that is built into the apple iPhone.
-        titleLabel?.font = UIFont.preferredFont(forTextStyle: .headline)
+        // setting up the base logic for button
+        configuration = .tinted()
+        configuration?.cornerStyle = .medium
         // use autoLayout - always set to false
         translatesAutoresizingMaskIntoConstraints = false
     }
     
-    func set(backgroundColor: UIColor, title: String) {
-        self.backgroundColor = backgroundColor
-        setTitle(title, for: .normal)
+    func set(color: UIColor, title: String) {
+        configuration?.baseBackgroundColor = color
+        configuration?.baseForegroundColor = color
+        configuration?.title = title
     }
-    
 }
