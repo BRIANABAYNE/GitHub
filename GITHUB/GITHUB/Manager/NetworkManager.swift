@@ -14,6 +14,8 @@ class NetworkManager {
     static let shared = NetworkManager()
     private let baseURL = "https://api.github.com/users/"
     let cache = NSCache<NSString, UIImage>()
+    
+    
     private init() {
         
     }
@@ -95,9 +97,7 @@ class NetworkManager {
         
     }
     
-    
-    
-    
+
     func downloadImage(from urlString: String, completion: @escaping (UIImage?) -> Void) {
         
         let cacheKey = NSString(string: urlString)
@@ -116,8 +116,7 @@ class NetworkManager {
             // guarding self because it now optional since I used weak self, weak self is always optional
             guard let self = self,
                   error == nil,
-                  let response = response as? HTTPURLResponse,
-                  response.statusCode == 200,
+                  let response = response as? HTTPURLResponse, response.statusCode == 200,
                   let data = data,
                   let image = UIImage(data: data) else {
                 completion(nil)
