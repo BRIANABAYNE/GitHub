@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A1BC7152B7C116000E11B48 /* FollowerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1BC7142B7C116000E11B48 /* FollowerView.swift */; };
 		3A5EFC392B6D80BB009381B5 /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5EFC382B6D80BB009381B5 /* UIHelper.swift */; };
 		3A5EFC422B6E9574009381B5 /* GFEmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5EFC412B6E9574009381B5 /* GFEmptyStateView.swift */; };
 		3A5EFC442B701E1A009381B5 /* UserInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5EFC432B701E1A009381B5 /* UserInfoVC.swift */; };
@@ -48,6 +49,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3A1BC7142B7C116000E11B48 /* FollowerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerView.swift; sourceTree = "<group>"; };
 		3A5EFC382B6D80BB009381B5 /* UIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIHelper.swift; sourceTree = "<group>"; };
 		3A5EFC412B6E9574009381B5 /* GFEmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFEmptyStateView.swift; sourceTree = "<group>"; };
 		3A5EFC432B701E1A009381B5 /* UserInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoVC.swift; sourceTree = "<group>"; };
@@ -101,6 +103,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3A1BC7132B7C113800E11B48 /* FollowerCell */ = {
+			isa = PBXGroup;
+			children = (
+				3A1BC7142B7C116000E11B48 /* FollowerView.swift */,
+			);
+			path = FollowerCell;
+			sourceTree = "<group>";
+		};
 		3A5EFC3C2B6E94AC009381B5 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -285,6 +295,7 @@
 		3A746A172B6C5658001A8024 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				3A1BC7132B7C113800E11B48 /* FollowerCell */,
 				3A746A182B6C5681001A8024 /* FollowerCell.swift */,
 				3A5EFC5E2B71DF03009381B5 /* FavoriteCell.swift */,
 			);
@@ -361,6 +372,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A1BC7152B7C116000E11B48 /* FollowerView.swift in Sources */,
 				3A7469CF2B5785F7001A8024 /* SearchVC.swift in Sources */,
 				3A5EFC562B7134C8009381B5 /* GFFollowerVC.swift in Sources */,
 				3A7469D12B578632001A8024 /* FavoriteListVC.swift in Sources */,
