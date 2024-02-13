@@ -28,9 +28,9 @@ class GFButton: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
     
- convenience init(backgroundColor: UIColor, title: String) {
+    convenience init(color: UIColor, title: String, systemImageName: String) {
         self.init(frame: .zero)
-       set(color: backgroundColor, title: title)
+     set(color: color, title: title, systemImageName: systemImageName)
     }
     
     private func configure() {
@@ -41,9 +41,13 @@ class GFButton: UIButton {
         translatesAutoresizingMaskIntoConstraints = false
     }
     
-    func set(color: UIColor, title: String) {
+    func set(color: UIColor, title: String, systemImageName: String) {
         configuration?.baseBackgroundColor = color
         configuration?.baseForegroundColor = color
         configuration?.title = title
+        // SS Symbols
+        configuration?.image = UIImage(systemName: systemImageName)
+        configuration?.imagePadding = 6
+        configuration?.imagePlacement = .leading
     }
 }
