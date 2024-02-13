@@ -181,17 +181,35 @@ class FollowersListVC: DataLoadingVC {
     
     @objc func addButtonTapped() {
         showLoadingView()
-        NetworkManager.shared.getUserInfo(for: userName) { [weak self] result in
-            guard let self = self else { return }
-            self.dismissLoadingView()
-            switch result {
-            case .success(let user):
-                self.addUserToFavorites(user: user)
-            case .failure(let error):
-                self.presentGFAlertOnMainThread(alertTitle: "Something went wrong", message: error.rawValue, buttonTitle: "OKAY")
+        
+        
+        Task {
+            do {
+                let user = try await NetworkManager.shared.getUserInfo(for: userName)
+                addUserToFavorites(user: user)
+                dismissLoadingView()
+            } catch {
+                if let gfError = error as? GFError {
+                    presentGFAlert(alertTitle: "Something went wrong", message: gfError.rawValue, buttonTitle: "OK")
+                } else {
+                    presentDefaultError()
+                }
+                
+                dismissLoadingView()
             }
         }
     }
+//        NetworkManager.shared.getUserInfo(for: userName) { [weak self] result in
+//            guard let self = self else { return }
+//            self.dismissLoadingView()
+//            switch result {
+//            case .success(let user):
+//                self.addUserToFavorites(user: user)
+//            case .failure(let error):
+//                self.presentGFAlertOnMainThread(alertTitle: "Something went wrong", message: error.rawValue, buttonTitle: "OKAY")
+//            }
+//        }
+//    }
     
     func updateData(on followers: [Follower]) {
         var snapshot = NSDiffableDataSourceSnapshot<Section, Follower>()
@@ -213,11 +231,16 @@ class FollowersListVC: DataLoadingVC {
         PersistenceManager.updateWith(favorite: favorite, actionType: .add) { [weak self] error in
             guard let self = self else { return }
             guard let error = error else  {
-                self.presentGFAlertOnMainThread(alertTitle: "Success!", message: "You have successfully favorited this user! ", buttonTitle: "YAYA")
+                DispatchQueue.main.async {
+                    self.presentGFAlert(alertTitle: "Success!", message: "You have successfully favorited this user! ", buttonTitle: "YAYA")
+                }
+                
                 return
             }
             
-            self.presentGFAlertOnMainThread(alertTitle: "Something went wrong", message: error.rawValue, buttonTitle: "OKAY")
+            DispatchQueue.main.sync {
+                self.presentGFAlert(alertTitle: "Something went wrong", message: error.rawValue, buttonTitle: "OKAY")
+            }
         }
         
     }

@@ -65,7 +65,7 @@ class SearchVC: UIViewController {
         // guarding to check that UserName is entered
         guard isUserNameEntered else {
             // if it's not entered, then ALERT will trigger
-           presentGFAlertOnMainThread(alertTitle: "Empty Username", message: "Please enter a GitHub Username!", buttonTitle: "OKAY")
+           presentGFAlert(alertTitle: "Empty Username", message: "Please enter a GitHub Username!", buttonTitle: "OKAY")
          return
         }
         

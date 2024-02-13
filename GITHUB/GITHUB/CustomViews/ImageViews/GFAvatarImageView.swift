@@ -8,7 +8,7 @@
 import UIKit
 
 class GFAvatarImageView: UIImageView {
-                                           // using a bang here because I know I have the image in my supporting files.
+    // using a bang here because I know I have the image in my supporting files.
     let cache = NetworkManager.shared.cache
     let placeholderImage = Images.placeholder
     
@@ -30,12 +30,8 @@ class GFAvatarImageView: UIImageView {
     
     
     func downloadImage(fromURL url: String) {
-        NetworkManager.shared.downloadImage(from: url) { [weak self] image in
-            guard let self = self else { return }
-            DispatchQueue.main.async {
-                self.image = image
-            }
+        Task {
+            image = await NetworkManager.shared.downloadImage(from: url) ?? placeholderImage
         }
     }
-    
 }

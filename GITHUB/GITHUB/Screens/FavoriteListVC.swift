@@ -59,7 +59,10 @@ class FavoriteListVC: DataLoadingVC {
             case .success(let favorites):
                 self.updateUI(with: favorites)
             case .failure(let error):
-                self.presentGFAlertOnMainThread(alertTitle: "Something went wrong", message: error.rawValue, buttonTitle: "OKAY")
+                
+                DispatchQueue.main.async {
+                    self.presentGFAlert(alertTitle: "Something went wrong", message: error.rawValue, buttonTitle: "OKAY")
+                }
             }
         }
     }
@@ -122,7 +125,9 @@ extension FavoriteListVC: UITableViewDataSource, UITableViewDelegate {
                 return
             }
             
-             presentGFAlert(alertTitle: "Bad Stuff Happened", message: error.rawValue, buttonTitle: "OKAY")
+                DispatchQueue.main.async {
+                    self.presentGFAlert(alertTitle: "Bad Stuff Happened", message: error.rawValue, buttonTitle: "OKAY")
+                }
         }
     }
 }

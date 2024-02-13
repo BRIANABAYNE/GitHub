@@ -95,52 +95,41 @@ class NetworkManager {
         guard let url = URL(string: endpoint) else {
             throw GFError.invalidUsername
         }
-        // URL Session
+        // URL Session - tuple (data, response)
         let(data, response) = try await URLSession.shared.data(from: url)
-         
-            // checking for data "response" - if we have a response, then we are checking to make sure that response is returning with 200, 200 is what we are getting back from the network call.
-            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-                throw GFError.invalidResponse
-            }
         
-            do {
-            
-               return try decoder.decode(User.self, from: data)
-            } catch {
-                throw GFError.invalidData
-            }
+        // checking for data "response" - if we have a response, then we are checking to make sure that response is returning with 200, 200 is what we are getting back from the network call.
+        guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+            throw GFError.invalidResponse
         }
+        
+        do {
+            return try decoder.decode(User.self, from: data)
+        } catch {
+            throw GFError.invalidData
+        }
+    }
 
-
-    func downloadImage(from urlString: String) async throws -> UIImage {
+// Not making a throws because I don't care about the errors - DO I have an image or is it nil
+    func downloadImage(from urlString: String) async -> UIImage? {
         
         let cacheKey = NSString(string: urlString)
-        
         if let image = cache.object(forKey: cacheKey) {
-            throw GFError.invalidImage
+            return image
         }
         
         guard let url = URL(string: urlString) else {
-            throw GFError.invalidData
+            return nil
         }
-        
-        let(data, response) = try await URLSession.shared.data(from: url)
-        
-        
-            // guarding self because it now optional since I used weak self, weak self is always optional
-            guard let self = self,
-                  error == nil,
-                  let response = response as? HTTPURLResponse, response.statusCode == 200,
-                  let data = data,
-                  let image = UIImage(data: data) else {
-                completion(nil)
-                return
-            }
+        do {
+            // TUPLE
+            let(data, _) = try await URLSession.shared.data(from: url)
             
-            self.cache.setObject(image, forKey: cacheKey)
-             completion(image)
-            }
-            // what actually calls the URLSESSION
-            task.resume()
+            guard let image = UIImage(data: data) else { return nil }
+            cache.setObject(image, forKey: cacheKey)
+            return image
+        } catch {
+            return nil
         }
     }
+}
