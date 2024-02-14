@@ -15,7 +15,6 @@ class FavoriteListVC: DataLoadingVC {
     
     // MARK: - Lifecycles
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
      
@@ -27,6 +26,18 @@ class FavoriteListVC: DataLoadingVC {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         getFavorites()
+    }
+    
+    override func updateContentUnavailableConfiguration(using state: UIContentUnavailableConfigurationState) {
+        if favorites.isEmpty {
+            var config = UIContentUnavailableConfiguration.empty()
+            config.image = .init(systemName: "heart.slash.fill")
+            config.text = "No Favorites"
+            config.secondaryText = "Add a Favorite on the follower list screen"
+            contentUnavailableConfiguration = config
+        } else {
+            contentUnavailableConfiguration = nil
+        }
     }
     
     func configureTableView() {
@@ -70,21 +81,18 @@ class FavoriteListVC: DataLoadingVC {
     
     func updateUI(with favorites: [Follower]) {
         
-        if favorites.isEmpty {
-            self.callEmptyStateView(with: "No favorites? \nAdd one on the follower screen.", in: self.view)
-        } else {
-            self.favorites = favorites
-            DispatchQueue.main.async {
-                // call reload the tableView on the main thread
-                self.tableView.reloadData()
-                // edge case - empty case
-                self.view.bringSubviewToFront(self.tableView)
-            }
+        //        if favorites.isEmpty {
+        //            self.callEmptyStateView(with: "No favorites? \nAdd one on the follower screen.", in: self.view)
+        //        } else {
+        self.favorites = favorites
+        setNeedsUpdateContentUnavailableConfiguration()
+        DispatchQueue.main.async {
+            // call reload the tableView on the main thread
+            self.tableView.reloadData()
+            // edge case - empty case
+            self.view.bringSubviewToFront(self.tableView)
         }
-        
-        
     }
-    
 }
 
 extension FavoriteListVC: UITableViewDataSource, UITableViewDelegate {

@@ -51,3 +51,7 @@ class GFButton: UIButton {
         configuration?.imagePlacement = .leading
     }
 }
+
+#Preview {
+    return GFButton(color: .systemPink, title: "Happy Valentine's Day", systemImageName: "Heart")
+}
