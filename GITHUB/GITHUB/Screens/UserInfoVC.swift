@@ -68,18 +68,6 @@ class UserInfoVC: DataLoadingVC {
                 }
             }
         }
-//
-//        NetworkManager.shared.getUserInfo(for: userName) { [weak self] result in
-//            guard let self = self else { return }
-//            switch result {
-//            case .success(let user):
-//                DispatchQueue.main.async {
-//                    self.configureUIElements(with: user)
-//                }
-//            case .failure(let error):
-//                self.presentGFAlertOnMainThread(alertTitle: "Something went wrong", message: error.rawValue, buttonTitle: "OKAY")
-//            }
-//        }
     }
     
     func configureUIElements(with user: User) {
@@ -107,14 +95,14 @@ class UserInfoVC: DataLoadingVC {
             ])
         }
         
-        view.addSubview(headerView)
-        view.addSubview(itemViewOne)
-        view.addSubview(itemViewTwo)
-        
-        
-        headerView.translatesAutoresizingMaskIntoConstraints = false
-        itemViewOne.translatesAutoresizingMaskIntoConstraints = false
-        itemViewTwo.translatesAutoresizingMaskIntoConstraints = false
+//        view.addSubview(headerView)
+//        view.addSubview(itemViewOne)
+//        view.addSubview(itemViewTwo)
+//        
+//        
+//        headerView.translatesAutoresizingMaskIntoConstraints = false
+//        itemViewOne.translatesAutoresizingMaskIntoConstraints = false
+//        itemViewTwo.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
             headerView.topAnchor.constraint(equalTo: contentView.topAnchor),
@@ -144,7 +132,6 @@ class UserInfoVC: DataLoadingVC {
     }
 }
 
-
 extension UserInfoVC: GFRepoItemVCDelegate {
     func didTapGitHubProfile(for user: User) {
             guard let url = URL(string: user.htmlUrl) else {
@@ -160,7 +147,6 @@ extension UserInfoVC: GFRepoItemVCDelegate {
     
     }
 
-
 extension UserInfoVC: GFFollowersVCDelegate {
     
     func didTapGetFollowers(for user: User) {
@@ -175,6 +161,4 @@ extension UserInfoVC: GFFollowersVCDelegate {
         delegate.didRequestFollowers(for: user.login)
         dissMissVC()
     }
-    
 }
-    

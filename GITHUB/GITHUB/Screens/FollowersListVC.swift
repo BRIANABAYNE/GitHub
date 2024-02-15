@@ -255,7 +255,7 @@ class FollowersListVC: DataLoadingVC {
                 return
             }
             
-            DispatchQueue.main.sync {
+            DispatchQueue.main.async {
                 self.presentGFAlert(alertTitle: "Something went wrong", message: error.rawValue, buttonTitle: "OKAY")
             }
         }
