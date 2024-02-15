@@ -9,13 +9,13 @@ import UIKit
 
 class GFSecondaryTitleLabel: UILabel {
     
+    // MARK: - Initializers
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
-        
     }
-    
-    // storyboard init
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -25,11 +25,12 @@ class GFSecondaryTitleLabel: UILabel {
         font = UIFont.systemFont(ofSize: fontSize, weight: .medium)
     }
     
+    // MARK: - Function
+    
     private func configure() {
         textColor = .secondaryLabel
         adjustsFontSizeToFitWidth = true
         minimumScaleFactor = 0.90
-        // will break it up if it's to line
         lineBreakMode = .byTruncatingTail
         translatesAutoresizingMaskIntoConstraints = false
     }

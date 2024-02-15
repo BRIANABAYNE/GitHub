@@ -8,17 +8,14 @@
 import UIKit
 
 protocol ItemInfoVCDelegate: AnyObject {
-    
     func didTapGitHubProfile(for user: User)
     func didTapGetFollowers(for user: User)
 }
 
-
-/// Parent ViewController 
 class GFItemInfoVC: UIViewController {
     
     // MARK: - Properties
-
+    
     let stackView = UIStackView()
     let itemInfoViewOne = GFItemInfoView()
     let itemInfoViewTwo = GFItemInfoView()
@@ -26,7 +23,7 @@ class GFItemInfoVC: UIViewController {
     
     var user: User!
     
-    // MARK: - Methods
+    // MARK: - Initializers
     
     init(user: User) {
         super.init(nibName: nil, bundle: nil)
@@ -48,6 +45,8 @@ class GFItemInfoVC: UIViewController {
         configureStackView()
     }
     
+    // MARK: - Functions
+    
     private func configureBackgroundView() {
         view.layer.cornerRadius = 18
         view.backgroundColor = .secondarySystemBackground
@@ -60,18 +59,15 @@ class GFItemInfoVC: UIViewController {
         stackView.addArrangedSubview(itemInfoViewTwo)
     }
     
-    
     private func configureActionButton() {
         actionButton.addTarget(self, action: #selector(actionButtonTapped), for: .touchUpInside)
     }
-    
     
     @objc func actionButtonTapped() {
         
     }
     
     private func layoutUI() {
-        // Calling the extension UIView
         view.addSubviews(stackView,actionButton)
         
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -87,7 +83,6 @@ class GFItemInfoVC: UIViewController {
             actionButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
             actionButton.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant: -padding),
             actionButton.heightAnchor.constraint(equalToConstant: 44)
-    
         ])
     }
 }

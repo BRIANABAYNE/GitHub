@@ -8,13 +8,14 @@
 import UIKit
 
 class GFBodyLabel: UILabel {
+    
+    // MARK: - Initializers
 
     override init(frame: CGRect) {
         super.init(frame: frame)
          configure()
     }
     
-    // storyboard init
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -24,17 +25,15 @@ class GFBodyLabel: UILabel {
         self.textAlignment = textAlignment
     }
     
+    // MARK: - Functions
+    
     private func configure() {
         textColor = .secondaryLabel
-        /// Dynamic Type
         font = UIFont.preferredFont(forTextStyle: .body)
         adjustsFontForContentSizeCategory = true
         adjustsFontSizeToFitWidth = true
-        
         minimumScaleFactor = 0.75
-        // line with wrap
         lineBreakMode = .byWordWrapping
         translatesAutoresizingMaskIntoConstraints = false
     }
-    
 }

@@ -7,7 +7,7 @@
 
 import UIKit
 
-
+// MARK: - Protocol
 protocol GFRepoItemVCDelegate: AnyObject {
     func didTapGitHubProfile(for user: User)
 
@@ -15,8 +15,11 @@ protocol GFRepoItemVCDelegate: AnyObject {
 
 class GFRepoVC: GFItemInfoVC {
     
+    // MARK: - Properties
+    
     weak var delegate: GFRepoItemVCDelegate!
     
+    // MARK: - Initializers
     
     init(user: User, delegate: GFRepoItemVCDelegate) {
         super.init(user: user)
@@ -27,7 +30,6 @@ class GFRepoVC: GFItemInfoVC {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
     // MARK: - Lifecycles
     
     override func viewDidLoad() {
@@ -35,7 +37,7 @@ class GFRepoVC: GFItemInfoVC {
         configureItems()
     }
     
-    // MARK: - Methods
+    // MARK: - Functions 
     
     private func configureItems() {
         itemInfoViewOne.set(itemInfoType: .repos, withCount: user.publicRepos)

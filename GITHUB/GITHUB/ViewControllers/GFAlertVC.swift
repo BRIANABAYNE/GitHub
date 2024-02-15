@@ -7,6 +7,7 @@
 
 import UIKit
 
+
 class GFAlertVC: UIViewController {
     
     // MARK: - Properties
@@ -22,7 +23,7 @@ class GFAlertVC: UIViewController {
     let padding: CGFloat = 20
     
     
-    // MARK: - Init
+    // MARK: - Initializers
     
     init(alertTitle: String, message: String, buttonTitle: String) {
         super.init(nibName: nil, bundle: nil)
@@ -46,22 +47,21 @@ class GFAlertVC: UIViewController {
         configureActionButton()
         configureMessageLabel()
     }
+    // MARK: - Functions
     
     func configureContainerView() {
     
-    
         NSLayoutConstraint.activate([
-            // passing in an array of constraints - 4 constraints are normally best
+            
             containerView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             containerView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             containerView.widthAnchor.constraint(equalToConstant: 280),
             containerView.heightAnchor.constraint(equalToConstant: 220)
         ])
-
      }
     
     func configureTitleLabel() {
-        // nil coal with ??
+        
         titleLabel.text = alertTitle ?? "Something went wrong"
         
         NSLayoutConstraint.activate([
@@ -84,11 +84,9 @@ class GFAlertVC: UIViewController {
         ])
     }
     
-    
     func configureMessageLabel() {
         messageLabel.text = message ?? "Unable to complete request"
         messageLabel.numberOfLines = 4
-        
         
         NSLayoutConstraint.activate([
             messageLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8),

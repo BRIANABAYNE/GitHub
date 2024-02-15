@@ -8,9 +8,13 @@
 import UIKit
 
 class GFAvatarImageView: UIImageView {
-    // using a bang here because I know I have the image in my supporting files.
+  
+    // MARK: - Properties
+    
     let cache = NetworkManager.shared.cache
     let placeholderImage = Images.placeholder
+    
+    // MARK: - Initializers
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -21,13 +25,14 @@ class GFAvatarImageView: UIImageView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Functions
+    
     private func configure() {
         layer.cornerRadius = 10
         clipsToBounds = true
         image = placeholderImage
         translatesAutoresizingMaskIntoConstraints = false
     }
-    
     
     func downloadImage(fromURL url: String) {
         Task {

@@ -7,13 +7,15 @@
 
 import UIKit
 
+// MARK: - Protocol
 
 protocol GFFollowersVCDelegate: AnyObject {
-    
     func didTapGetFollowers(for user: User)
 }
 
 class GFFollowerVC: GFItemInfoVC {
+    
+    // MARK: - Properties
     
     weak var delegate: GFFollowersVCDelegate!
     
@@ -24,6 +26,8 @@ class GFFollowerVC: GFItemInfoVC {
         configureItems()
     }
     
+    // MARK: - Initializers
+    
     init(user: User, delegate: GFFollowersVCDelegate) {
         super.init(user: user)
         self.delegate = delegate
@@ -33,6 +37,7 @@ class GFFollowerVC: GFItemInfoVC {
         fatalError("init(coder:) has not been implemented")
     }
 
+    // MARK: - Functions
     
     private func configureItems() {
         itemInfoViewOne.set(itemInfoType: .followers, withCount: user.followers)
@@ -43,6 +48,4 @@ class GFFollowerVC: GFItemInfoVC {
     override func actionButtonTapped() {
         delegate.didTapGetFollowers(for: user)
     }
-    
 }
-

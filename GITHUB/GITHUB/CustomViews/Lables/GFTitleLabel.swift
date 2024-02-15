@@ -9,13 +9,14 @@ import UIKit
 
 class GFTitleLabel: UILabel {
     
+    // MARK: - Initializers
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
         
     }
-    
-    // storyboard init
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -24,14 +25,14 @@ class GFTitleLabel: UILabel {
        self.init(frame: .zero)
         self.textAlignment = textAlignment
         self.font = UIFont.systemFont(ofSize: fontSize, weight: .bold)
-       
     }
+    
+    // MARK: - Function
     
     private func configure() {
         textColor = .label
         adjustsFontSizeToFitWidth = true
         minimumScaleFactor = 0.90
-        // will break it up if it's to line
         lineBreakMode = .byTruncatingTail
         translatesAutoresizingMaskIntoConstraints = false
     }
