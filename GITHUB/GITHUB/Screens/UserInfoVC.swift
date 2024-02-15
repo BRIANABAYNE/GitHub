@@ -7,15 +7,18 @@
 
 import UIKit
 
+// MARK: - Protocol
+
 protocol UserInfoVCDelegate: AnyObject {
     func didRequestFollowers(for userName: String)
 }
 
 class UserInfoVC: DataLoadingVC {
-
+    
+// MARK: - Properties
+    
     let scrollView = UIScrollView()
     let contentView = UIView()
-    
     
     let headerView = UIView()
     let itemViewOne = UIView()
@@ -25,7 +28,9 @@ class UserInfoVC: DataLoadingVC {
     
     var userName: String!
     weak var delegate: UserInfoVCDelegate!
-
+    
+// MARK: - Lifecycles
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureViewController()
@@ -34,6 +39,7 @@ class UserInfoVC: DataLoadingVC {
         getUserInfo()
     
     }
+    // MARK: - Functions
     
     func configureViewController() {
         view.backgroundColor = .systemBackground
@@ -94,15 +100,7 @@ class UserInfoVC: DataLoadingVC {
                 itemView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -padding),
             ])
         }
-        
-//        view.addSubview(headerView)
-//        view.addSubview(itemViewOne)
-//        view.addSubview(itemViewTwo)
-//        
-//        
-//        headerView.translatesAutoresizingMaskIntoConstraints = false
-//        itemViewOne.translatesAutoresizingMaskIntoConstraints = false
-//        itemViewTwo.translatesAutoresizingMaskIntoConstraints = false
+
 
         NSLayoutConstraint.activate([
             headerView.topAnchor.constraint(equalTo: contentView.topAnchor),
@@ -131,6 +129,8 @@ class UserInfoVC: DataLoadingVC {
         dismiss(animated: true)
     }
 }
+
+// MARK: - Extensions
 
 extension UserInfoVC: GFRepoItemVCDelegate {
     func didTapGitHubProfile(for user: User) {
