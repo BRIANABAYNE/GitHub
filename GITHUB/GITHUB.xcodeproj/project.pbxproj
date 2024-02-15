@@ -109,13 +109,33 @@
 			path = FollowerCell;
 			sourceTree = "<group>";
 		};
+		3A1BC7162B7ECB2E00E11B48 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				3A5EFC492B703638009381B5 /* GFUserInfoHeaderVC.swift */,
+				3A5EFC512B70991B009381B5 /* GFItemInfoVC.swift */,
+				3A5EFC552B7134C8009381B5 /* GFFollowerVC.swift */,
+				3A5EFC532B709C61009381B5 /* GFRepoVC.swift */,
+				3A7469DE2B58CE61001A8024 /* GFAlertVC.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		3A1BC7172B7ECB9700E11B48 /* TabBarController */ = {
+			isa = PBXGroup;
+			children = (
+				3A5EFC612B7281C0009381B5 /* GFTabBarController.swift */,
+			);
+			path = TabBarController;
+			sourceTree = "<group>";
+		};
 		3A5EFC3C2B6E94AC009381B5 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				3A5EFC602B72818A009381B5 /* New Group */,
 				3A5EFC412B6E9574009381B5 /* GFEmptyStateView.swift */,
 				3A5EFC4F2B709259009381B5 /* GFItemInfoView.swift */,
 				3A5EFC632B732070009381B5 /* GFAlertContainerView.swift */,
+				3A5EFC602B72818A009381B5 /* New Group */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -154,30 +174,9 @@
 			path = Lables;
 			sourceTree = "<group>";
 		};
-		3A5EFC482B7035F5009381B5 /* ViewControllers */ = {
-			isa = PBXGroup;
-			children = (
-				3A5EFC572B713534009381B5 /* ItemInfoVCs */,
-				3A5EFC492B703638009381B5 /* GFUserInfoHeaderVC.swift */,
-				3A5EFC512B70991B009381B5 /* GFItemInfoVC.swift */,
-				3A5EFC532B709C61009381B5 /* GFRepoVC.swift */,
-				3A5EFC552B7134C8009381B5 /* GFFollowerVC.swift */,
-				3A7469DE2B58CE61001A8024 /* GFAlertVC.swift */,
-			);
-			path = ViewControllers;
-			sourceTree = "<group>";
-		};
-		3A5EFC572B713534009381B5 /* ItemInfoVCs */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ItemInfoVCs;
-			sourceTree = "<group>";
-		};
 		3A5EFC602B72818A009381B5 /* New Group */ = {
 			isa = PBXGroup;
 			children = (
-				3A5EFC612B7281C0009381B5 /* GFTabBarController.swift */,
 				3A5EFC652B741A25009381B5 /* DataLoadingVC.swift */,
 			);
 			path = "New Group";
@@ -206,7 +205,7 @@
 				3A746A112B6BE956001A8024 /* Manager */,
 				3A746A0C2B696FDB001A8024 /* Model */,
 				3A746A0A2B696A91001A8024 /* Extension */,
-				3A5EFC482B7035F5009381B5 /* ViewControllers */,
+				3A1BC7172B7ECB9700E11B48 /* TabBarController */,
 				3A746A092B696A5B001A8024 /* CustomViews */,
 				3A746A082B696A2B001A8024 /* Screens */,
 				3A746A0B2B696AF4001A8024 /* SupportingFiles */,
@@ -228,6 +227,7 @@
 		3A746A092B696A5B001A8024 /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
+				3A1BC7162B7ECB2E00E11B48 /* ViewControllers */,
 				3A5EFC3F2B6E94D1009381B5 /* ImageViews */,
 				3A5EFC402B6E94E2009381B5 /* Lables */,
 				3A5EFC3E2B6E94C2009381B5 /* TextFields */,
@@ -292,9 +292,9 @@
 		3A746A172B6C5658001A8024 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				3A1BC7132B7C113800E11B48 /* FollowerCell */,
 				3A746A182B6C5681001A8024 /* FollowerCell.swift */,
 				3A5EFC5E2B71DF03009381B5 /* FavoriteCell.swift */,
+				3A1BC7132B7C113800E11B48 /* FollowerCell */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
