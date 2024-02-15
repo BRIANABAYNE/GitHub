@@ -7,6 +7,8 @@
 
 import UIKit
 
+// MARK: - Enum: Constants
+
 enum SFSymbols {
 
     static let location = UIImage(systemName: "mappin.and.ellipse")
@@ -16,14 +18,12 @@ enum SFSymbols {
     static let following = UIImage(systemName: "person.2")
 }
 
-
 enum Images {
     
     static let placeholder = UIImage(resource: .avatar)
     static let ghLogo = UIImage(resource: .ghLogo)
     static let emptyStateImage = UIImage(resource: .emptyStateLogo)
 }
-
 
 enum ScreenSize {
     
@@ -32,7 +32,6 @@ enum ScreenSize {
     static let maxLength    = max(ScreenSize.width, ScreenSize.height)
     static let minLength    = min(ScreenSize.width, ScreenSize.height)
 }
-
 
 enum DeviceTypes {
     

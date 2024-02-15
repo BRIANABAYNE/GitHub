@@ -5,9 +5,9 @@
 //  Created by Briana Bayne on 2/4/24.
 //
 
-
 import Foundation
-// the string is the raw value of the enum - confirming to the protocol "Error"
+
+// MARK: - Enum: Custom Error 
 
 enum GFError: String, Error {
     
